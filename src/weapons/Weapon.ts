@@ -10,9 +10,12 @@ interface WeaponAttributeWithMin extends PartialWeaponAttribute {
   min: number;
 }
 
-interface WeaponAttributeWithMinAndMax extends WeaponAttributeWithMin {
+interface WeaponAttributeWithMax extends PartialWeaponAttribute {
   max: number;
 }
+
+type WeaponAttributeWithMinAndMax = WeaponAttributeWithMin &
+  WeaponAttributeWithMax;
 
 interface PartialWeapon {
   antiBeast?: PartialWeaponAttribute;
@@ -30,7 +33,7 @@ interface PartialWeapon {
   fire?: PartialWeaponAttribute;
   holy?: PartialWeaponAttribute;
   ice?: PartialWeaponAttribute;
-  magicalPower: WeaponAttributeWithMinAndMax;
+  magicalPower: WeaponAttributeWithMax;
   speed: WeaponAttributeWithMin;
   thunder?: PartialWeaponAttribute;
   wind?: PartialWeaponAttribute;
