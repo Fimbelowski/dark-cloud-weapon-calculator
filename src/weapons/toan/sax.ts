@@ -1,6 +1,6 @@
 import Weapon from '../Weapon';
 
-const chopper = new Weapon({
+const sax = new Weapon({
   antiMimic: { min: 10 },
   antiPlant: { min: 10 },
   attack: { max: 65, min: 26 },
@@ -10,4 +10,4 @@ const chopper = new Weapon({
   thunder: { min: 10 },
 });
 
-export default chopper;
+export default sax;
