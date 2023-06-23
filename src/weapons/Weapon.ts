@@ -4,32 +4,37 @@ interface WeaponAttribute {
   min: number;
 }
 
-type BaseAttributes = 'attack' | 'endurance' | 'speed' | 'magicalPower';
+type PartialWeaponAttribute = Partial<WeaponAttribute>;
 
-type ElementalAttributes = 'fire' | 'holy' | 'ice' | 'thunder' | 'wind';
+interface WeaponAttributeWithMin extends PartialWeaponAttribute {
+  min: number;
+}
 
-type MonsterTypes =
-  | 'beast'
-  | 'dragon'
-  | 'mage'
-  | 'marine'
-  | 'metal'
-  | 'mimic'
-  | 'plant'
-  | 'rock'
-  | 'sky'
-  | 'undead';
+interface WeaponAttributeWithMinAndMax extends WeaponAttributeWithMin {
+  max: number;
+}
 
-type AntiMonstertTypeAttributes = `anti${Capitalize<MonsterTypes>}`;
-
-type WeaponAttributeKeys =
-  | BaseAttributes
-  | ElementalAttributes
-  | AntiMonstertTypeAttributes;
-
-type WeaponWithPartialAttributes = {
-  [key in WeaponAttributeKeys]: Partial<WeaponAttribute>;
-};
+interface PartialWeapon {
+  antiBeast?: PartialWeaponAttribute;
+  antiDragon?: PartialWeaponAttribute;
+  antiMage?: PartialWeaponAttribute;
+  antiMarine?: PartialWeaponAttribute;
+  antiMetal?: PartialWeaponAttribute;
+  antiMimic?: PartialWeaponAttribute;
+  antiPlant?: PartialWeaponAttribute;
+  antiRock?: PartialWeaponAttribute;
+  antiSky?: PartialWeaponAttribute;
+  antiUndead?: PartialWeaponAttribute;
+  attack: WeaponAttributeWithMinAndMax;
+  endurance: WeaponAttributeWithMin;
+  fire?: PartialWeaponAttribute;
+  holy?: PartialWeaponAttribute;
+  ice?: PartialWeaponAttribute;
+  magicalPower: WeaponAttributeWithMinAndMax;
+  speed: WeaponAttributeWithMin;
+  thunder?: PartialWeaponAttribute;
+  wind?: PartialWeaponAttribute;
+}
 
 export default class Weapon {
   // Not DRY but couldn't find an elegant solution with TS.
@@ -54,26 +59,26 @@ export default class Weapon {
   wind: WeaponAttribute;
 
   constructor({
-    antiBeast,
-    antiDragon,
-    antiMage,
-    antiMarine,
-    antiMetal,
-    antiMimic,
-    antiPlant,
-    antiRock,
-    antiSky,
-    antiUndead,
+    antiBeast = {},
+    antiDragon = {},
+    antiMage = {},
+    antiMarine = {},
+    antiMetal = {},
+    antiMimic = {},
+    antiPlant = {},
+    antiRock = {},
+    antiSky = {},
+    antiUndead = {},
     attack,
     endurance,
-    fire,
-    holy,
-    ice,
+    fire = {},
+    holy = {},
+    ice = {},
     magicalPower,
     speed,
-    thunder,
-    wind,
-  }: WeaponWithPartialAttributes) {
+    thunder = {},
+    wind = {},
+  }: PartialWeapon) {
     this.antiBeast = this.mergeDefaultsIntoPartialAttribute(antiBeast);
     this.antiDragon = this.mergeDefaultsIntoPartialAttribute(antiDragon);
     this.antiMage = this.mergeDefaultsIntoPartialAttribute(antiMage);
