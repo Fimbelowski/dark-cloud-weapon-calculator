@@ -2,6 +2,6 @@ import Sword from './Sword';
 
 export default class HeavensCloud extends Sword {
   constructor() {
-    super("Heaven's Cloud");
+    super("Heaven's Cloud", ['Dark Cloud']);
   }
 }

@@ -2,6 +2,6 @@ import Sword from './Sword';
 
 export default class LambsSword extends Sword {
   constructor() {
-    super("Lamb's Sword");
+    super("Lamb's Sword", ['Atlamillia Sword']);
   }
 }

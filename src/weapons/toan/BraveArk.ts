@@ -2,6 +2,6 @@ import Sword from './Sword';
 
 export default class BraveArk extends Sword {
   constructor() {
-    super('Brave Ark');
+    super('Brave Ark', ['Dark Cloud']);
   }
 }

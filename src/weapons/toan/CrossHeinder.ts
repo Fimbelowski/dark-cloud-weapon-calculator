@@ -2,6 +2,6 @@ import Sword from './Sword';
 
 export default class CrossHeinder extends Sword {
   constructor() {
-    super('Cross Heinder');
+    super('Cross Heinder', ['Big Bang']);
   }
 }
