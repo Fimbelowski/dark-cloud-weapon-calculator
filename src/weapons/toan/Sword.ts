@@ -1,7 +1,7 @@
 import Weapon from '../Weapon';
 import type SwordName from './SwordName';
 
-export default class Sword extends Weapon {
+export default abstract class Sword extends Weapon {
   constructor(swordName: SwordName) {
     super(swordName);
   }
