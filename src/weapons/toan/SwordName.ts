@@ -34,7 +34,7 @@ type SwordName =
   | 'Sax'
   | 'Serpent Sword'
   | 'Shamshir'
-  | 'Small Swod'
+  | 'Small Sword'
   | 'Sun Sword'
   | 'Sword of Zeus'
   | 'Tsukikage'
