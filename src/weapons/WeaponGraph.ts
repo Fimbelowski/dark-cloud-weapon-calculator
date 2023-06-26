@@ -2,8 +2,11 @@ import DirectedGraph from './DirectedGraph';
 import type Sword from './toan/Sword';
 
 export default class WeaponGraph<T extends Sword> extends DirectedGraph {
-  constructor() {
+  constructor(...weapons: T[]) {
     super();
+    weapons.forEach((weapon) => {
+      this.addWeapon(weapon);
+    });
   }
 
   addWeapon({ buildsUpInto, name }: T) {
