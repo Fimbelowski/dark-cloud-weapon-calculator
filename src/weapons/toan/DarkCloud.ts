@@ -1,7 +1,3 @@
 import Sword from './Sword';
 
-export default class DarkCloud extends Sword {
-  constructor() {
-    super('Dark Cloud', ['7th Heaven']);
-  }
-}
+export default new Sword('Dark Cloud', ['7th Heaven']);

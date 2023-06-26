@@ -1,7 +1,3 @@
 import Sword from './Sword';
 
-export default class Tsukikage extends Sword {
-  constructor() {
-    super('Tsukikage', ['Tsukikage']);
-  }
-}
+export default new Sword('Tsukikage', ["Heaven's Cloud"]);

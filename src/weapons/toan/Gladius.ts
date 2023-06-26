@@ -1,7 +1,3 @@
 import Sword from './Sword';
 
-export default class Gladius extends Sword {
-  constructor() {
-    super('Gladius', ['Chopper', 'Small Sword']);
-  }
-}
+export default new Sword('Gladius', ['Chopper', 'Small Sword']);

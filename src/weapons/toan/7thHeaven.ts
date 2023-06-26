@@ -1,7 +1,3 @@
 import Sword from './Sword';
 
-export default class SeventhHeaven extends Sword {
-  constructor() {
-    super('7th Heaven');
-  }
-}
+export default new Sword('7th Heaven');

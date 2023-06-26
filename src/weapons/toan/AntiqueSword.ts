@@ -1,7 +1,3 @@
 import Sword from './Sword';
 
-export default class AntiqueSword extends Sword {
-  constructor() {
-    super('Antique Sword', ['Brave Ark']);
-  }
-}
+export default new Sword('Antique Sword', ['Brave Ark']);
