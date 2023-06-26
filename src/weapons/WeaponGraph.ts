@@ -1,12 +1,15 @@
 import DirectedGraph from './DirectedGraph';
-import type Weapon from './Weapon';
+import type Sword from './toan/Sword';
 
-export default class WeaponGraph<T extends Weapon> extends DirectedGraph {
+export default class WeaponGraph<T extends Sword> extends DirectedGraph {
   constructor() {
     super();
   }
 
-  addWeapon(weapon: T) {
-    this.addVertex(weapon.name);
+  addWeapon({ buildsUpInto, name }: T) {
+    this.addVertex(name);
+    buildsUpInto.forEach((destinationWeaponName) => {
+      this.addEdge(name, destinationWeaponName);
+    });
   }
 }
