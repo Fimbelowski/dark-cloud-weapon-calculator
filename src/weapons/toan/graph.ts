@@ -41,7 +41,7 @@ import swordOfZeus from './swordOfZeus';
 import tsukikage from './tsukikage';
 import wiseOwlSword from './wiseOwlSword';
 
-const graph = new WeaponGraph(
+export default new WeaponGraph(
   sevenBranchSword,
   seventhHeaven,
   agasSword,
@@ -83,5 +83,3 @@ const graph = new WeaponGraph(
   tsukikage,
   wiseOwlSword
 );
-
-export default graph;
