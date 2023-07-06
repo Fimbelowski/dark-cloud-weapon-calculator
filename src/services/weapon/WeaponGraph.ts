@@ -1,10 +1,10 @@
 import DirectedGraph from '../graph/DirectedGraph';
 import type Weapon from './Weapon';
-import type WeaponNameByType from './WeaponNameByType';
+import type WeaponName from './WeaponName';
 
-export default class WeaponGraph<
-  T extends keyof WeaponNameByType
-> extends DirectedGraph<Weapon<T>> {
+export default class WeaponGraph<T extends WeaponName> extends DirectedGraph<
+  Weapon<T>
+> {
   constructor(...weapons: Array<Weapon<T>>) {
     super();
 
