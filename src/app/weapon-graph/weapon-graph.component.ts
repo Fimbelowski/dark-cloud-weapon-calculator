@@ -12,7 +12,7 @@ import type WeaponName from 'src/services/weapon/WeaponName';
 export class WeaponGraphComponent<T extends WeaponName> implements OnInit {
   @Input({ required: true }) weaponGraph!: Readonly<WeaponGraph<T>>;
 
-  columns = 0;
+  styles = new Map<string, string>();
   weaponsByDistanceFromTerminal = new Map<number, Array<Weapon<T>>>();
 
   ngOnInit() {
@@ -26,10 +26,16 @@ export class WeaponGraphComponent<T extends WeaponName> implements OnInit {
       this.weaponsByDistanceFromTerminal.get(distance)?.push(weapon);
     });
 
+    let columns = 0;
+
     for (const weapons of this.weaponsByDistanceFromTerminal.values()) {
-      this.columns = Math.max(this.columns, weapons.length);
+      columns = Math.max(columns, weapons.length);
     }
 
-    console.log(this.columns);
+    this.styles.set('grid-template-columns', `repeat(${columns}, 1fr)`);
+    this.styles.set(
+      'grid-template-rows',
+      `repeat(${this.weaponsByDistanceFromTerminal.size}, 1fr)`
+    );
   }
 }
