@@ -3,9 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { WeaponGraphComponent } from './weapon-graph/weapon-graph.component';
+import { WeaponComponent } from './weapon/weapon.component';
 
 @NgModule({
-  declarations: [AppComponent, WeaponGraphComponent],
+  declarations: [AppComponent, WeaponGraphComponent, WeaponComponent],
   imports: [BrowserModule],
   providers: [],
   bootstrap: [AppComponent],
