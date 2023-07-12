@@ -17,8 +17,8 @@ export class WeaponGraphComponent<T extends WeaponName> implements OnInit {
 
   ngOnInit() {
     this.weaponGraph.vertices.forEach((weapon) => {
-      const { distanceFromTerminal } = weapon;
-
+      const distanceFromTerminal =
+        this.weaponGraph.getVertexDistanceFromTerminal(weapon);
       if (this.weaponsMatrix[distanceFromTerminal] === undefined) {
         this.weaponsMatrix[distanceFromTerminal] = [];
       }
@@ -26,10 +26,7 @@ export class WeaponGraphComponent<T extends WeaponName> implements OnInit {
       this.weaponsMatrix[distanceFromTerminal].push(weapon);
     });
 
-    const columns = Math.max(
-      ...this.weaponsMatrix.map((weapons) => weapons.length)
-    );
-
+    const columns = Math.max(...this.weaponsMatrix.map((row) => row.length));
     const rows = this.weaponsMatrix.length;
 
     this.styles.set('grid-template-columns', `repeat(${columns}, 1fr)`);
