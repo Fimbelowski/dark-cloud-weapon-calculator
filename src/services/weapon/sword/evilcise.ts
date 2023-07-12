@@ -1,4 +1,4 @@
 import drainSeeker from './drainSeeker';
 import Sword from './Sword';
 
-export default new Sword('Evilcise', [drainSeeker]);
+export default new Sword('Evilcise', new Set([drainSeeker]));

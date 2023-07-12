@@ -1,4 +1,4 @@
 import ariseMardan from './ariseMardan';
 import Sword from './Sword';
 
-export default new Sword('Mardan Twei', [ariseMardan]);
+export default new Sword('Mardan Twei', new Set([ariseMardan]));

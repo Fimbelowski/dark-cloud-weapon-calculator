@@ -1,4 +1,4 @@
 import braveArk from './braveArk';
 import Sword from './Sword';
 
-export default new Sword('Antique Sword', [braveArk]);
+export default new Sword('Antique Sword', new Set([braveArk]));
