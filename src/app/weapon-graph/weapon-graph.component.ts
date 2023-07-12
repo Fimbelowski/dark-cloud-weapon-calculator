@@ -13,29 +13,26 @@ export class WeaponGraphComponent<T extends WeaponName> implements OnInit {
   @Input({ required: true }) weaponGraph!: Readonly<WeaponGraph<T>>;
 
   styles = new Map<string, string>();
-  weaponsByDistanceFromTerminal = new Map<number, Array<Weapon<T>>>();
+  weaponsMatrix: Array<Array<Weapon<T>>> = [];
 
   ngOnInit() {
     this.weaponGraph.vertices.forEach((weapon) => {
-      const distance = weapon.distanceFromTerminal;
+      const { distanceFromTerminal } = weapon;
 
-      if (!this.weaponsByDistanceFromTerminal.has(distance)) {
-        this.weaponsByDistanceFromTerminal.set(distance, []);
+      if (this.weaponsMatrix[distanceFromTerminal] === undefined) {
+        this.weaponsMatrix[distanceFromTerminal] = [];
       }
 
-      this.weaponsByDistanceFromTerminal.get(distance)?.push(weapon);
+      this.weaponsMatrix[distanceFromTerminal].push(weapon);
     });
 
-    let columns = 0;
+    const columns = Math.max(
+      ...this.weaponsMatrix.map((weapons) => weapons.length)
+    );
 
-    for (const weapons of this.weaponsByDistanceFromTerminal.values()) {
-      columns = Math.max(columns, weapons.length);
-    }
+    const rows = this.weaponsMatrix.length;
 
     this.styles.set('grid-template-columns', `repeat(${columns}, 1fr)`);
-    this.styles.set(
-      'grid-template-rows',
-      `repeat(${this.weaponsByDistanceFromTerminal.size}, 1fr)`
-    );
+    this.styles.set('grid-template-rows', `repeat(${rows}, 1fr)`);
   }
 }
