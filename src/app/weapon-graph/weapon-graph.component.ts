@@ -1,6 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 
 import type Weapon from 'src/services/weapon/Weapon';
+import { WeaponComponent } from '../weapon/weapon.component';
 import WeaponGraph from 'src/services/weapon/WeaponGraph';
 import type WeaponName from 'src/services/weapon/WeaponName';
 import type WeaponNameByType from 'src/services/weapon/WeaponNameByType';
@@ -10,8 +19,12 @@ import type WeaponNameByType from 'src/services/weapon/WeaponNameByType';
   templateUrl: './weapon-graph.component.html',
   styleUrls: ['./weapon-graph.component.scss'],
 })
-export class WeaponGraphComponent<T extends WeaponName> implements OnInit {
+export class WeaponGraphComponent<T extends WeaponName>
+  implements AfterViewInit, OnInit
+{
   @Input({ required: true }) weaponGraph!: Readonly<WeaponGraph<T>>;
+  @ViewChildren(WeaponComponent, { read: ElementRef })
+  weaponElements!: QueryList<ElementRef>;
 
   edges = new Set<[WeaponNameByType[T], WeaponNameByType[T]]>();
   styles = new Map<string, string>();
@@ -23,14 +36,18 @@ export class WeaponGraphComponent<T extends WeaponName> implements OnInit {
     this.setStyles();
   }
 
+  ngAfterViewInit() {
+    this.weaponElements.forEach(({ nativeElement }) => {
+      console.log((nativeElement as HTMLElement).children[0].innerHTML);
+    });
+  }
+
   buildEdges() {
     this.weaponGraph.adjacencyList.forEach((value, key) => {
       value.forEach((potentialBuildUp) => {
         this.edges.add([key.name, potentialBuildUp.name]);
       });
     });
-
-    console.log(this.edges);
   }
 
   buildWeaponsMatrix() {
