@@ -1,6 +1,9 @@
-.weapon {
+:host {
   border: 1px solid black;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 10px;
   text-align: center;
 }
