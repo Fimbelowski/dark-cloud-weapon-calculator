@@ -5,9 +5,8 @@
     [ngStyle]="{ 'grid-row-start': rowIndex + 1 }"
   />
 </ng-container>
-<ng-container *ngFor="let edge of edges">
-  <app-edge
-    [from]="edge[0]"
-    [to]="edge[1]"
-  />
-</ng-container>
+<app-edge
+  *ngFor="let edge of edges"
+  [from]="edge[0]"
+  [to]="edge[1]"
+/>
