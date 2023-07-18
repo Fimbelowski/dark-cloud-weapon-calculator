@@ -74,7 +74,7 @@ export class WeaponGraphComponent<T extends WeaponName>
 
   buildWeaponElementsByName() {
     this.children.forEach((child) => {
-      const weaponElement = child.nativeElement.children[0];
+      const weaponElement = child.nativeElement;
       this.weaponElementsByName.set(weaponElement.innerText, weaponElement);
     });
   }
