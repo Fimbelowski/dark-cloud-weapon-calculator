@@ -1,5 +1,5 @@
-.weapon-graph-component {
+:host {
   display: grid;
-  background-color: yellow;
   gap: 60px 15px;
+  position: relative;
 }

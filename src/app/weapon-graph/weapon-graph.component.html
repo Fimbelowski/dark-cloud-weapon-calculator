@@ -1,12 +1,13 @@
-<div
-  class="weapon-graph-component"
-  [ngStyle]="styles"
->
-  <ng-container *ngFor="let row of weaponsMatrix.reverse(); index as rowIndex">
-    <app-weapon
-      *ngFor="let weapon of row"
-      [weapon]="weapon"
-      [ngStyle]="{ 'grid-row-start': rowIndex + 1 }"
-    />
-  </ng-container>
-</div>
+<ng-container *ngFor="let row of weaponsMatrix.reverse(); index as rowIndex">
+  <app-weapon
+    *ngFor="let weapon of row"
+    [weapon]="weapon"
+    [ngStyle]="{ 'grid-row-start': rowIndex + 1 }"
+  />
+</ng-container>
+<ng-container *ngFor="let edge of edges">
+  <app-edge
+    [from]="edge[0]"
+    [to]="edge[1]"
+  />
+</ng-container>

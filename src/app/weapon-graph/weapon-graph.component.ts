@@ -2,8 +2,9 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  HostBinding,
   Input,
-  OnInit,
+  OnChanges,
   QueryList,
   ViewChildren,
 } from '@angular/core';
@@ -20,33 +21,67 @@ import type WeaponNameByType from 'src/services/weapon/WeaponNameByType';
   styleUrls: ['./weapon-graph.component.scss'],
 })
 export class WeaponGraphComponent<T extends WeaponName>
-  implements AfterViewInit, OnInit
+  implements AfterViewInit, OnChanges
 {
+  @HostBinding('style.grid-template-columns') get gridTemplateColumns() {
+    const columns = Math.max(...this.weaponsMatrix.map((row) => row.length));
+    return `repeat(${columns}, 1fr)`;
+  }
+  @HostBinding('style.grid-template-rows') get gridTemplateRows() {
+    const rows = this.weaponsMatrix.length;
+    return `repeat(${rows}, 1fr)`;
+  }
   @Input({ required: true }) weaponGraph!: Readonly<WeaponGraph<T>>;
   @ViewChildren(WeaponComponent, { read: ElementRef })
-  weaponElements!: QueryList<ElementRef>;
+  children!: QueryList<ElementRef>;
 
-  edges = new Set<[WeaponNameByType[T], WeaponNameByType[T]]>();
-  styles = new Map<string, string>();
+  edges = new Set<[HTMLElement, HTMLElement]>();
+  weaponsByName = new Map<WeaponNameByType[T], Weapon<T>>();
+  weaponElementsByName = new Map<WeaponNameByType[T], HTMLElement>();
   weaponsMatrix: Array<Array<Weapon<T>>> = [];
 
-  ngOnInit() {
+  ngOnChanges() {
+    this.buildWeaponsByName();
     this.buildWeaponsMatrix();
-    this.buildEdges();
-    this.setStyles();
   }
 
   ngAfterViewInit() {
-    this.weaponElements.forEach(({ nativeElement }) => {
-      console.log((nativeElement as HTMLElement).children[0].innerHTML);
-    });
+    this.buildWeaponElementsByName();
+    this.buildEdges();
   }
 
   buildEdges() {
-    this.weaponGraph.adjacencyList.forEach((value, key) => {
-      value.forEach((potentialBuildUp) => {
-        this.edges.add([key.name, potentialBuildUp.name]);
+    this.weaponGraph.vertices.forEach((weapon) => {
+      const weaponElement = this.weaponElementsByName.get(weapon.name);
+
+      if (weaponElement === undefined) {
+        throw Error(`No element for weapon with name ${weapon.name} exists.`);
+      }
+
+      weapon.buildsUpInto.forEach((buildUpWeapon) => {
+        const buildUpElement = this.weaponElementsByName.get(
+          buildUpWeapon.name
+        );
+
+        if (buildUpElement === undefined) {
+          throw Error(`No element for weapon with name ${weapon.name} exists.`);
+        }
+
+        this.edges.add([weaponElement, buildUpElement]);
       });
+    });
+  }
+
+  buildWeaponElementsByName() {
+    this.children.forEach((child) => {
+      const weaponElement = child.nativeElement.children[0];
+      this.weaponElementsByName.set(weaponElement.innerText, weaponElement);
+    });
+  }
+
+  buildWeaponsByName() {
+    this.weaponGraph.vertices.forEach((weapon) => {
+      this.weaponsByName.set(weapon.name, weapon);
     });
   }
 
@@ -60,13 +95,5 @@ export class WeaponGraphComponent<T extends WeaponName>
 
       this.weaponsMatrix[distanceFromTerminal].push(weapon);
     });
-  }
-
-  setStyles() {
-    const columns = Math.max(...this.weaponsMatrix.map((row) => row.length));
-    const rows = this.weaponsMatrix.length;
-
-    this.styles.set('grid-template-columns', `repeat(${columns}, 1fr)`);
-    this.styles.set('grid-template-rows', `repeat(${rows}, 1fr)`);
   }
 }
