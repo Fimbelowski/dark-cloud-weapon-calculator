@@ -1,12 +1,3 @@
-<ng-container *ngFor="let row of weaponsMatrix.reverse(); index as rowIndex">
-  <app-weapon
-    *ngFor="let weapon of row"
-    [weapon]="weapon"
-    [ngStyle]="{ 'grid-row-start': rowIndex + 1 }"
-  />
+<ng-container *ngFor="let vertex of weaponGraph.vertices | keyvalue">
+  <app-weapon [weapon]="vertex.key" />
 </ng-container>
-<app-edge
-  *ngFor="let edge of edges"
-  [from]="edge[0]"
-  [to]="edge[1]"
-/>

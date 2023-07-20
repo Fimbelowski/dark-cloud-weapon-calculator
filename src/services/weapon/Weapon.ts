@@ -1,5 +1,5 @@
 import type WeaponNameByType from './WeaponNameByType';
-import type WeaponName from './WeaponName';
+import type WeaponName from './WeaponType';
 
 export default abstract class Weapon<T extends WeaponName> {
   buildsUpInto: Set<Weapon<T>>;

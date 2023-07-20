@@ -1,4 +1,4 @@
-import WeaponGraph from '../WeaponGraph';
+import WeaponGraph from 'src/services/graphs/WeaponGraph';
 
 import sevenBranchSword from './7BranchSword';
 import seventhHeaven from './7thHeaven';
