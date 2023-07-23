@@ -1,24 +1,24 @@
 import Vertex from './Vertex';
 
-export default class AcyclicDirectedGraph<T> {
+export default abstract class AcyclicDirectedGraph<T> {
   vertices: Map<T, Vertex<T>>;
 
   constructor() {
     this.vertices = new Map();
   }
 
-  addEdge(source: T, destination: T) {
+  protected addEdge(source: T, destination: T) {
     const sourceVertex = this.addVertex(source);
     const destinationVertex = this.addVertex(destination);
 
     sourceVertex.addAdjacent(destinationVertex);
 
-    if (this.cycleExists()) {
+    if (this.#cycleExists()) {
       throw Error('Cycle detected.');
     }
   }
 
-  addVertex(data: T) {
+  protected addVertex(data: T) {
     let vertex = this.vertices.get(data);
 
     if (vertex !== undefined) {
@@ -31,7 +31,7 @@ export default class AcyclicDirectedGraph<T> {
     return vertex;
   }
 
-  cycleExists() {
+  #cycleExists() {
     const visited = new Set<Vertex<T>>();
     const stack: Array<Vertex<T>> = [];
 
@@ -69,5 +69,25 @@ export default class AcyclicDirectedGraph<T> {
     }
 
     return false;
+  }
+
+  protected getVertexLongestDistanceFromLeaf(data: T): number {
+    const dataVertex = this.vertices.get(data);
+
+    if (dataVertex === undefined) {
+      throw Error('Vertex not found.');
+    }
+
+    const { adjacent } = dataVertex;
+
+    if (adjacent.size === 0) {
+      return 0;
+    }
+
+    return Math.max(
+      ...Array.from(adjacent.values()).map(
+        ({ data }) => this.getVertexLongestDistanceFromLeaf(data) + 1
+      )
+    );
   }
 }

@@ -1,5 +1,9 @@
-<ng-container *ngFor="let vertex of weaponGraph.vertices | keyvalue">
-  <app-weapon [weapon]="vertex.key" />
+<ng-container *ngFor="let row of weaponMatrix; index as i">
+  <app-weapon
+    *ngFor="let weapon of row"
+    [weapon]="weapon"
+    [ngStyle]="{ 'grid-row-start': i + 1 }"
+  />
 </ng-container>
 <app-edge
   *ngFor="let edge of edges"

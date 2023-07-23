@@ -20,4 +20,16 @@ export default class WeaponGraph<
       this.addEdge(weapon, buildUpWeapon);
     }
   }
+
+  getWeaponLongestDistanceFromLeaf(weapon: Weapon<T>) {
+    if (weapon.defaultWeapon) {
+      return Math.max(
+        ...Array.from(this.vertices.keys()).map((weapon) =>
+          this.getVertexLongestDistanceFromLeaf(weapon)
+        )
+      );
+    }
+
+    return this.getVertexLongestDistanceFromLeaf(weapon);
+  }
 }
