@@ -9,6 +9,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 
+import arrayAverage from '../utilities/arrayAverage';
 import countInversions from '../utilities/countInversions';
 import heapsAlgorithm from '../utilities/heapsAlgorithm';
 import shuffleArray from '../utilities/shuffleArray';
@@ -17,6 +18,8 @@ import { WeaponComponent } from '../weapon/weapon.component';
 import type WeaponGraph from 'src/services/graphs/WeaponGraph';
 import type WeaponType from 'src/services/weapon/WeaponType';
 import type WeaponNameByType from 'src/services/weapon/WeaponNameByType';
+
+type SweepDirection = 'down' | 'up';
 
 @Component({
   selector: 'app-weapon-graph',
@@ -104,26 +107,32 @@ export class WeaponGraphComponent<T extends WeaponType>
     while (forgiveness > 0) {
       const tempMatrix = matrix.map((row) => row.slice());
 
+      // Downward Sweep
       let totalSweepIntersections = 0;
 
-      // Downward Sweep
       for (let i = 0; i < tempMatrix.length - 1; i++) {
         const fixedRow = tempMatrix[i];
         const mutableRow = tempMatrix[i + 1];
 
         if (mutableRow.length <= 6) {
           // Use premutation heuristic
-          matrix[i + 1] = this.optimizeIntersectionsByPermutation(
+          tempMatrix[i + 1] = this.optimizeIntersectionsByPermutation(
             fixedRow,
-            mutableRow
+            mutableRow,
+            'down'
           );
         } else {
           // Use barycenter heuristic
+          tempMatrix[i + 1] = this.optimizeIntersectionsByBarycenter(
+            fixedRow,
+            mutableRow,
+            'down'
+          );
         }
 
         totalSweepIntersections += this.getIntersectionsBetweenRows(
           fixedRow,
-          mutableRow
+          tempMatrix[i + 1]
         );
       }
 
@@ -135,15 +144,35 @@ export class WeaponGraphComponent<T extends WeaponType>
       }
 
       // Upward Sweep
+      totalSweepIntersections = 0;
+
       for (let i = tempMatrix.length - 1; i > 0; i--) {
         const fixedRow = tempMatrix[i];
         const mutableRow = tempMatrix[i - 1];
+        let candidateMutableRow = mutableRow.slice();
 
         if (mutableRow.length <= 6) {
-          // Use premutation heuristic
+          // Use Permutation Heuristic
+          candidateMutableRow = this.optimizeIntersectionsByPermutation(
+            fixedRow,
+            mutableRow,
+            'up'
+          );
         } else {
-          // Use barycenter heuristic
+          // Use Barycenter Heuristic
+          candidateMutableRow = this.optimizeIntersectionsByBarycenter(
+            fixedRow,
+            mutableRow,
+            'up'
+          );
         }
+
+        totalSweepIntersections += this.getIntersectionsBetweenRows(
+          candidateMutableRow,
+          fixedRow
+        );
+
+        tempMatrix[i - 1] = candidateMutableRow;
       }
 
       if (totalSweepIntersections < lowestIntersections) {
@@ -153,20 +182,21 @@ export class WeaponGraphComponent<T extends WeaponType>
         forgiveness--;
       }
 
-      forgiveness--;
+      console.log(lowestIntersections);
     }
-
-    console.log(this.getTotalNumberOfIntersections(matrix));
 
     this.weaponMatrix = matrix;
   }
 
-  getIntersectionsBetweenRows(a: Array<Weapon<T>>, b: Array<Weapon<T>>) {
+  getIntersectionsBetweenRows(
+    upperRow: Array<Weapon<T>>,
+    lowerRow: Array<Weapon<T>>
+  ) {
     const edges: Array<[number, number]> = [];
 
-    a.forEach(({ buildsUpInto }, sourceIndex) => {
+    upperRow.forEach(({ buildsUpInto }, sourceIndex) => {
       buildsUpInto.forEach((buildUpWeapon) => {
-        edges.push([sourceIndex, b.indexOf(buildUpWeapon)]);
+        edges.push([sourceIndex, lowerRow.indexOf(buildUpWeapon)]);
       });
     });
 
@@ -190,23 +220,72 @@ export class WeaponGraphComponent<T extends WeaponType>
     return totalIntersections;
   }
 
+  optimizeIntersectionsByBarycenter(
+    fixedRow: Array<Weapon<T>>,
+    mutableRow: Array<Weapon<T>>,
+    sweepDirection: SweepDirection
+  ) {
+    const tempMutableRow = mutableRow.slice();
+
+    tempMutableRow.sort((a, b) => {
+      const aAdjacentIndices: number[] = [];
+      const bAdjacentIndices: number[] = [];
+
+      for (let i = 0; i < fixedRow.length; i++) {
+        const fixedRowWeapon = fixedRow[i];
+
+        if (sweepDirection === 'down') {
+          if (fixedRowWeapon.buildsUpInto.has(a)) {
+            aAdjacentIndices.push(i);
+          }
+
+          if (fixedRowWeapon.buildsUpInto.has(b)) {
+            bAdjacentIndices.push(i);
+          }
+        } else {
+          if (a.buildsUpInto.has(fixedRowWeapon)) {
+            aAdjacentIndices.push(i);
+          }
+
+          if (b.buildsUpInto.has(fixedRowWeapon)) {
+            bAdjacentIndices.push(i);
+          }
+        }
+      }
+
+      const aBaryCenterAverage = arrayAverage(aAdjacentIndices);
+      const bBaryCenterAverage = arrayAverage(bAdjacentIndices);
+
+      if (aBaryCenterAverage === bBaryCenterAverage) {
+        if (Math.random() < 0.5) {
+          return 1;
+        }
+      }
+
+      return aBaryCenterAverage - bBaryCenterAverage;
+    });
+
+    return tempMutableRow;
+  }
+
   optimizeIntersectionsByPermutation(
     fixedRow: Array<Weapon<T>>,
-    mutableRow: Array<Weapon<T>>
+    mutableRow: Array<Weapon<T>>,
+    sweepDirection: SweepDirection
   ) {
     const shuffledMutableRow = shuffleArray(mutableRow);
 
     let minIntersections = this.getIntersectionsBetweenRows(
-      fixedRow,
-      shuffledMutableRow
+      sweepDirection === 'down' ? fixedRow : shuffledMutableRow,
+      sweepDirection === 'down' ? shuffledMutableRow : fixedRow
     );
     let bestPermutation = shuffledMutableRow;
 
-    const mutableRowPermutations = heapsAlgorithm(mutableRow.slice());
+    const mutableRowPermutations = heapsAlgorithm(shuffledMutableRow.slice());
     mutableRowPermutations.forEach((permutation) => {
       const permutationIntersections = this.getIntersectionsBetweenRows(
-        fixedRow,
-        permutation
+        sweepDirection === 'down' ? fixedRow : permutation,
+        sweepDirection === 'down' ? permutation : fixedRow
       );
 
       if (permutationIntersections < minIntersections) {
