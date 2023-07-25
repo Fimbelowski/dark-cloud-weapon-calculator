@@ -101,88 +101,49 @@ export class WeaponGraphComponent<T extends WeaponType>
 
     matrix.reverse();
 
-    let forgiveness = 20;
-    let lowestIntersections = this.getTotalNumberOfIntersections(matrix);
+    let sweep = 1;
+    let forgiveness = 10;
+    let lowestGlobalIntersections = this.getTotalNumberOfIntersections(matrix);
 
     while (forgiveness > 0) {
       const tempMatrix = matrix.map((row) => row.slice());
 
-      // Downward Sweep
+      const sweepDirection: SweepDirection = sweep % 2 === 0 ? 'down' : 'up';
+      const delta = sweepDirection === 'down' ? 1 : -1;
+
       let totalSweepIntersections = 0;
 
-      for (let i = 0; i < tempMatrix.length - 1; i++) {
+      for (
+        let i = sweepDirection === 'down' ? 0 : tempMatrix.length - 1;
+        sweepDirection === 'down' ? i < tempMatrix.length - 1 : i > 0;
+        i += delta
+      ) {
         const fixedRow = tempMatrix[i];
-        const mutableRow = tempMatrix[i + 1];
+        let mutableRow = tempMatrix[i + delta];
 
-        if (mutableRow.length <= 6) {
-          // Use premutation heuristic
-          tempMatrix[i + 1] = this.optimizeIntersectionsByPermutation(
-            fixedRow,
-            mutableRow,
-            'down'
-          );
-        } else {
-          // Use barycenter heuristic
-          tempMatrix[i + 1] = this.optimizeIntersectionsByBarycenter(
-            fixedRow,
-            mutableRow,
-            'down'
-          );
-        }
+        const heuristicFunction =
+          mutableRow.length <= 8
+            ? this.optimizeIntersectionsByPermutation.bind(this)
+            : this.optimizeIntersectionsByBarycenter;
+
+        mutableRow = heuristicFunction(fixedRow, mutableRow, sweepDirection);
+        tempMatrix[i + delta] = mutableRow;
 
         totalSweepIntersections += this.getIntersectionsBetweenRows(
-          fixedRow,
-          tempMatrix[i + 1]
+          sweepDirection === 'down' ? fixedRow : mutableRow,
+          sweepDirection === 'down' ? mutableRow : fixedRow
         );
       }
 
-      if (totalSweepIntersections < lowestIntersections) {
-        lowestIntersections = totalSweepIntersections;
+      if (totalSweepIntersections < lowestGlobalIntersections) {
+        lowestGlobalIntersections = totalSweepIntersections;
         matrix = tempMatrix;
       } else {
         forgiveness--;
       }
 
-      // Upward Sweep
-      totalSweepIntersections = 0;
-
-      for (let i = tempMatrix.length - 1; i > 0; i--) {
-        const fixedRow = tempMatrix[i];
-        const mutableRow = tempMatrix[i - 1];
-        let candidateMutableRow = mutableRow.slice();
-
-        if (mutableRow.length <= 6) {
-          // Use Permutation Heuristic
-          candidateMutableRow = this.optimizeIntersectionsByPermutation(
-            fixedRow,
-            mutableRow,
-            'up'
-          );
-        } else {
-          // Use Barycenter Heuristic
-          candidateMutableRow = this.optimizeIntersectionsByBarycenter(
-            fixedRow,
-            mutableRow,
-            'up'
-          );
-        }
-
-        totalSweepIntersections += this.getIntersectionsBetweenRows(
-          candidateMutableRow,
-          fixedRow
-        );
-
-        tempMatrix[i - 1] = candidateMutableRow;
-      }
-
-      if (totalSweepIntersections < lowestIntersections) {
-        lowestIntersections = totalSweepIntersections;
-        matrix = tempMatrix;
-      } else {
-        forgiveness--;
-      }
-
-      console.log(lowestIntersections);
+      sweep += 2;
+      console.log(lowestGlobalIntersections);
     }
 
     this.weaponMatrix = matrix;
