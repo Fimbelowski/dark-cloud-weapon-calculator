@@ -143,7 +143,6 @@ export class WeaponGraphComponent<T extends WeaponType>
       }
 
       sweep += 2;
-      console.log(lowestGlobalIntersections);
     }
 
     this.weaponMatrix = matrix;
