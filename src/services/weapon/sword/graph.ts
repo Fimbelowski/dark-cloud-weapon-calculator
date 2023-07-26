@@ -7,7 +7,7 @@ import antiqueSword from './antiqueSword';
 import ariseMardan from './ariseMardan';
 import atlamilliaSword from './atlamilliaSword';
 import baselard from './baselard';
-import bastardSword from './bastardSword';
+import bastardSword from './busterSword';
 import bigBang from './bigBang';
 import boneRapier from './boneRapier';
 import braveArk from './braveArk';
