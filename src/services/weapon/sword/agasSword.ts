@@ -1,4 +1,4 @@
 import atlamilliaSword from './atlamilliaSword';
 import Sword from './Sword';
 
-export default new Sword("Aga's Sword", [atlamilliaSword]);
+export default new Sword("Aga's Sword", new Set([atlamilliaSword]));

@@ -1,4 +1,4 @@
 import crossHeinder from './crossHeinder';
 import Sword from './Sword';
 
-export default new Sword('Claymore', [crossHeinder]);
+export default new Sword('Claymore', new Set([crossHeinder]));
