@@ -2,12 +2,14 @@ import Weapon from '../Weapon';
 import type SwordName from './SwordName';
 
 export default class Sword extends Weapon<'sword'> {
+  ICON_URL_FOLDER = 'swords';
+
   constructor(
     name: SwordName,
-    iconOrIcons: string | string[],
+    iconPathOrPaths: string | string[],
     buildUpInto?: Set<Sword>,
     defaultWeapon = false
   ) {
-    super(name, iconOrIcons, buildUpInto, defaultWeapon);
+    super(name, iconPathOrPaths, buildUpInto, defaultWeapon);
   }
 }
