@@ -80,9 +80,10 @@ export class WeaponGraphComponent<T extends WeaponType>
   }
 
   buildWeaponElementsByName() {
-    this.children.forEach((child) => {
+    const flatMatrix = this.weaponMatrix.flat();
+    this.children.forEach((child, index) => {
       const weaponElement = child.nativeElement;
-      this.weaponElementsByName.set(weaponElement.innerText, weaponElement);
+      this.weaponElementsByName.set(flatMatrix[index].name, weaponElement);
     });
   }
 

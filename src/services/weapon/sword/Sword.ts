@@ -1,12 +1,9 @@
 import Weapon from '../Weapon';
-import type SwordName from './SwordName';
 
 export default class Sword extends Weapon<'sword'> {
-  constructor(
-    name: SwordName,
-    buildUpInto?: Set<Sword>,
-    defaultWeapon = false
-  ) {
-    super(name, buildUpInto, defaultWeapon);
+  ICON_URL_FOLDER = 'swords';
+
+  constructor(...args: ConstructorParameters<typeof Weapon<'sword'>>) {
+    super(...args);
   }
 }
