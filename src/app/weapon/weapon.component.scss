@@ -14,5 +14,9 @@
   &__icon {
     height: 35px;
     width: 35px;
+
+    &--unselectable {
+      background-color: yellow;
+    }
   }
 }

@@ -1,8 +1,9 @@
 <ng-container *ngFor="let row of weaponMatrix; index as i">
   <app-weapon
+    (click)="onWeaponClick(weapon)"
     *ngFor="let weapon of row"
-    [weapon]="weapon"
     [ngStyle]="{ 'grid-row-start': i + 1 }"
+    [weapon]="weapon"
   />
 </ng-container>
 <app-edge

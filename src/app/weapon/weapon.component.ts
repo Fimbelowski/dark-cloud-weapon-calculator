@@ -9,5 +9,6 @@ import type WeaponName from 'src/services/weapon/WeaponType';
   styleUrls: ['./weapon.component.scss'],
 })
 export class WeaponComponent<T extends WeaponName> {
+  @Input() unselectable = false;
   @Input({ required: true }) weapon!: Weapon<T>;
 }

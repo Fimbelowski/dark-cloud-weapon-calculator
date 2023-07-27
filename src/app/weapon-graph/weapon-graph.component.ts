@@ -45,6 +45,8 @@ export class WeaponGraphComponent<T extends WeaponType>
   children!: QueryList<ElementRef>;
 
   edges = new Set<[HTMLElement, HTMLElement]>();
+  possibleDestinationWeapons = new Set<Weapon<T>>();
+  sourceWeapon?: Weapon<T>;
   weaponElementsByName = new Map<WeaponNameByType[T], HTMLElement>();
   weaponMatrix: Array<Array<Weapon<T>>> = [];
 
@@ -179,6 +181,21 @@ export class WeaponGraphComponent<T extends WeaponType>
     }
 
     return totalIntersections;
+  }
+
+  isWeaponUnselectable(weapon: Weapon<T>) {
+    if (this.sourceWeapon === undefined) {
+      return false;
+    }
+
+    return !this.possibleDestinationWeapons.has(weapon);
+  }
+
+  onWeaponClick(weapon: Weapon<T>) {
+    this.sourceWeapon = weapon;
+    this.possibleDestinationWeapons =
+      this.weaponGraph.getWeaponDescendants(weapon);
+    console.log(this.possibleDestinationWeapons);
   }
 
   optimizeIntersectionsByBarycenter(

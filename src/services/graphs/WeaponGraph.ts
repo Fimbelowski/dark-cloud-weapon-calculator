@@ -21,6 +21,18 @@ export default class WeaponGraph<
     }
   }
 
+  getWeaponDescendants(weapon: Weapon<T>) {
+    const descendants = new Set<Weapon<T>>([weapon, ...weapon.buildsUpInto]);
+
+    weapon.buildsUpInto.forEach((buildUpWeapon) => {
+      this.getWeaponDescendants(buildUpWeapon).forEach((descendant) => {
+        descendants.add(descendant);
+      });
+    });
+
+    return descendants;
+  }
+
   getWeaponLongestDistanceFromLeaf(weapon: Weapon<T>) {
     if (weapon.defaultWeapon) {
       return Math.max(
