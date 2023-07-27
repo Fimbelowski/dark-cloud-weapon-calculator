@@ -1,10 +1,15 @@
 import type WeaponNameByType from './WeaponNameByType';
 import type WeaponName from './WeaponType';
 
+interface Icon {
+  alt: string;
+  pathFragment: string;
+}
+
 export default abstract class Weapon<T extends WeaponName> {
   buildsUpInto: Set<Weapon<T>>;
   defaultWeapon: boolean;
-  iconPaths: string[];
+  icons: Icon[];
   name: WeaponNameByType[T];
 
   private static BASE_ICON_URL = '../../../assets/weapons';
@@ -12,21 +17,17 @@ export default abstract class Weapon<T extends WeaponName> {
 
   constructor(
     name: WeaponNameByType[T],
-    iconPathOrPaths: string | string[],
+    iconOrIcons: Icon | Icon[],
     buildsUpInto = new Set<Weapon<T>>(),
     defaultWeapon = false
   ) {
     this.buildsUpInto = buildsUpInto;
     this.defaultWeapon = defaultWeapon;
-    this.iconPaths =
-      typeof iconPathOrPaths === 'string' ? [iconPathOrPaths] : iconPathOrPaths;
+    this.icons = Array.isArray(iconOrIcons) ? iconOrIcons : [iconOrIcons];
     this.name = name;
   }
 
-  getCompleteIconPaths() {
-    return this.iconPaths.map(
-      (iconPath) =>
-        `${Weapon.BASE_ICON_URL}/${this.ICON_URL_FOLDER}/${iconPath}.webp`
-    );
+  getCompleteIconPath({ pathFragment }: Icon) {
+    return `${Weapon.BASE_ICON_URL}/${this.ICON_URL_FOLDER}/${pathFragment}.webp`;
   }
 }
