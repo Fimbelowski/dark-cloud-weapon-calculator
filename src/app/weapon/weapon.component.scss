@@ -1,6 +1,18 @@
 :host {
+  align-items: center;
+  background-color: inherit;
   border: 1px solid black;
   border-radius: 5px;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 5px;
   text-align: center;
+}
+
+.weapon {
+  &__icon {
+    height: 35px;
+    width: 35px;
+  }
 }

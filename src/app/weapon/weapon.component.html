@@ -1,1 +1,9 @@
 {{ weapon.name }}
+<div class="weapon__icons-container">
+  <img
+    *ngFor="let path of weapon.getCompleteIconPaths()"
+    alt=""
+    class="weapon__icon"
+    [src]="path"
+  />
+</div>
