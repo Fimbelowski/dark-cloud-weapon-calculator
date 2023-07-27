@@ -1,4 +1,11 @@
 import atlamilliaSword from './atlamilliaSword';
 import Sword from './Sword';
 
-export default new Sword('Maneater', 'maneater', new Set([atlamilliaSword]));
+export default new Sword(
+  'Maneater',
+  {
+    alt: 'A curved sword with a thick red channel with oval-shaped stones embedded in it.',
+    pathFragment: 'maneater',
+  },
+  new Set([atlamilliaSword])
+);

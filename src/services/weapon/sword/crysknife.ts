@@ -4,6 +4,9 @@ import Sword from './Sword';
 
 export default new Sword(
   'Crysknife',
-  'crysknife',
+  {
+    alt: 'A short sword with a curvy, blue, triangle-shaped blade.',
+    pathFragment: 'crysknife',
+  },
   new Set([sandBreaker, smallSword])
 );

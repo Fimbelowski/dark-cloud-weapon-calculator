@@ -3,6 +3,9 @@ import Sword from './Sword';
 
 export default new Sword(
   "Heaven's Cloud",
-  'heavensCloud',
+  {
+    alt: 'A sword with a deep blue blade with ornate golden engravings and a golden hilt.',
+    pathFragment: 'heavensCloud',
+  },
   new Set([darkCloud])
 );

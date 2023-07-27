@@ -4,6 +4,9 @@ import tsukikage from './tsukikage';
 
 export default new Sword(
   'Serpent Sword',
-  'serpentSword',
+  {
+    alt: 'A red sword with a white-edged blade and pentagonal holes near the tip.',
+    pathFragment: 'serpentSword',
+  },
   new Set([evilcise, tsukikage])
 );
