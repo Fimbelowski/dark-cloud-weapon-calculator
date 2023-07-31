@@ -10,7 +10,7 @@
   text-align: center;
 }
 
-:host(.weapon--unselectable) {
+:host(.weapon--non-descendant) {
   opacity: 0.5;
 }
 

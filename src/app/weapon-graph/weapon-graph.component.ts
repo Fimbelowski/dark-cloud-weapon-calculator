@@ -55,6 +55,10 @@ export class WeaponGraphComponent<T extends WeaponType>
   weaponMatrix: Array<Array<Weapon<T>>> = [];
   weaponElementsByName = new Map<WeaponNameByType[T], HTMLElement>();
 
+  destinationWeapon: WritableSignal<Weapon<T> | undefined> = signal(undefined);
+  sourceWeapon: WritableSignal<Weapon<T> | undefined> = signal(undefined);
+  sourceOrDestinationToSetNext: 'destination' | 'source' = 'source';
+
   possibleDestinationWeapons: Signal<Set<Weapon<T>>> = computed(() => {
     const destinations = new Set<Weapon<T>>();
 
@@ -93,8 +97,6 @@ export class WeaponGraphComponent<T extends WeaponType>
 
     return reachableEdges;
   });
-
-  sourceWeapon: WritableSignal<Weapon<T> | undefined> = signal(undefined);
 
   ngOnChanges() {
     this.buildWeaponMatrix();
@@ -242,16 +244,33 @@ export class WeaponGraphComponent<T extends WeaponType>
     return !this.reachableEdges().get(from)?.has(to);
   }
 
-  isWeaponUnselectable(weapon: Weapon<T>) {
+  isWeaponDescendantOfSource(weapon: Weapon<T>) {
     if (this.sourceWeapon() === undefined) {
-      return false;
+      return true;
     }
 
-    return !this.possibleDestinationWeapons().has(weapon);
+    return this.possibleDestinationWeapons().has(weapon);
   }
 
   onWeaponClick(weapon: Weapon<T>) {
-    this.sourceWeapon.set(weapon);
+    if (
+      this.sourceWeapon() === undefined ||
+      !this.isWeaponDescendantOfSource(weapon)
+    ) {
+      this.sourceWeapon.set(weapon);
+      this.destinationWeapon.set(weapon);
+      this.sourceOrDestinationToSetNext = 'destination';
+      return;
+    }
+
+    if (this.sourceOrDestinationToSetNext === 'source') {
+      this.sourceWeapon.set(weapon);
+      this.sourceOrDestinationToSetNext = 'destination';
+      return;
+    }
+
+    this.destinationWeapon.set(weapon);
+    this.sourceOrDestinationToSetNext = 'source';
   }
 
   optimizeIntersectionsByBarycenter(

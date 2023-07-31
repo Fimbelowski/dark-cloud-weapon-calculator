@@ -3,7 +3,7 @@
     (click)="onWeaponClick(weapon)"
     *ngFor="let weapon of row"
     [ngStyle]="{ 'grid-row-start': i + 1 }"
-    [unselectable]="isWeaponUnselectable(weapon)"
+    [nonDescendant]="!isWeaponDescendantOfSource(weapon)"
     [weapon]="weapon"
   />
 </ng-container>
