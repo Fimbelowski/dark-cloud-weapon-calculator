@@ -1,15 +1,23 @@
 import Vertex from './Vertex';
 
 export default abstract class AcyclicDirectedGraph<T> {
+  adjacencyList: Map<T, Set<T>>;
   vertices: Map<T, Vertex<T>>;
 
   constructor() {
+    this.adjacencyList = new Map();
     this.vertices = new Map();
   }
 
   protected addEdge(source: T, destination: T) {
     const sourceVertex = this.addVertex(source);
     const destinationVertex = this.addVertex(destination);
+
+    if (!this.adjacencyList.has(source)) {
+      this.adjacencyList.set(source, new Set());
+    }
+
+    this.adjacencyList.get(source)?.add(destination);
 
     sourceVertex.addAdjacent(destinationVertex);
 

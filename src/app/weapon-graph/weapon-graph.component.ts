@@ -1,12 +1,17 @@
 import {
   AfterViewInit,
   Component,
+  computed,
   ElementRef,
   HostBinding,
   Input,
   OnChanges,
   QueryList,
+  type Signal,
+  signal,
   ViewChildren,
+  type WritableSignal,
+  ChangeDetectorRef,
 } from '@angular/core';
 
 import arrayAverage from '../utilities/arrayAverage';
@@ -29,6 +34,10 @@ type SweepDirection = 'down' | 'up';
 export class WeaponGraphComponent<T extends WeaponType>
   implements AfterViewInit, OnChanges
 {
+  constructor(private cd: ChangeDetectorRef) {}
+
+  @Input({ required: true }) weaponGraph!: Readonly<WeaponGraph<T>>;
+
   @HostBinding('style.grid-template-columns') get columns() {
     const columns = Math.max(...this.weaponMatrix.map((row) => row.length));
     return `repeat(${columns}, 1fr)`;
@@ -39,16 +48,53 @@ export class WeaponGraphComponent<T extends WeaponType>
     return `repeat(${rows}, 1fr)`;
   }
 
-  @Input({ required: true }) weaponGraph!: Readonly<WeaponGraph<T>>;
-
   @ViewChildren(WeaponComponent, { read: ElementRef })
   children!: QueryList<ElementRef>;
 
-  edges = new Set<[HTMLElement, HTMLElement]>();
-  possibleDestinationWeapons = new Set<Weapon<T>>();
-  sourceWeapon?: Weapon<T>;
-  weaponElementsByName = new Map<WeaponNameByType[T], HTMLElement>();
+  edges = new Map<HTMLElement, Set<HTMLElement>>();
   weaponMatrix: Array<Array<Weapon<T>>> = [];
+  weaponElementsByName = new Map<WeaponNameByType[T], HTMLElement>();
+
+  possibleDestinationWeapons: Signal<Set<Weapon<T>>> = computed(() => {
+    const destinations = new Set<Weapon<T>>();
+
+    const sourceWeapon = this.sourceWeapon();
+
+    if (sourceWeapon !== undefined) {
+      destinations.add(sourceWeapon);
+      this.weaponGraph
+        .getWeaponDescendants(sourceWeapon)
+        .forEach((descendant) => {
+          destinations.add(descendant);
+        });
+    }
+
+    return destinations;
+  });
+
+  reachableEdges: Signal<Map<HTMLElement, Set<HTMLElement>>> = computed(() => {
+    const reachableEdges = new Map<HTMLElement, Set<HTMLElement>>();
+
+    this.possibleDestinationWeapons().forEach((weapon) => {
+      const weaponElement = this.getWeaponElementByName(weapon.name);
+
+      if (!reachableEdges.has(weaponElement)) {
+        reachableEdges.set(weaponElement, new Set());
+      }
+
+      weapon.buildsUpInto.forEach((buildUpWeapon) => {
+        const buildUpWeaponElement = this.getWeaponElementByName(
+          buildUpWeapon.name
+        );
+
+        reachableEdges.get(weaponElement)?.add(buildUpWeaponElement);
+      });
+    });
+
+    return reachableEdges;
+  });
+
+  sourceWeapon: WritableSignal<Weapon<T> | undefined> = signal(undefined);
 
   ngOnChanges() {
     this.buildWeaponMatrix();
@@ -57,26 +103,21 @@ export class WeaponGraphComponent<T extends WeaponType>
   ngAfterViewInit() {
     this.buildWeaponElementsByName();
     this.buildEdges();
+
+    this.cd.detectChanges();
   }
 
   buildEdges() {
-    this.weaponGraph.vertices.forEach((value, weapon) => {
-      const weaponElement = this.weaponElementsByName.get(weapon.name);
+    this.weaponGraph.vertices.forEach(({ data: { buildsUpInto, name } }) => {
+      const weaponElement = this.getWeaponElementByName(name);
 
-      if (weaponElement === undefined) {
-        throw Error(`No element for weapon with name ${weapon.name} exists.`);
+      if (!this.edges.has(weaponElement)) {
+        this.edges.set(weaponElement, new Set());
       }
 
-      weapon.buildsUpInto.forEach((buildUpWeapon) => {
-        const buildUpElement = this.weaponElementsByName.get(
-          buildUpWeapon.name
-        );
-
-        if (buildUpElement === undefined) {
-          throw Error(`No element for weapon with name ${weapon.name} exists.`);
-        }
-
-        this.edges.add([weaponElement, buildUpElement]);
+      buildsUpInto.forEach(({ name }) => {
+        const buildUpWeaponElement = this.getWeaponElementByName(name);
+        this.edges.get(weaponElement)?.add(buildUpWeaponElement);
       });
     });
   }
@@ -125,7 +166,7 @@ export class WeaponGraphComponent<T extends WeaponType>
         let mutableRow = tempMatrix[i + delta];
 
         const heuristicFunction =
-          mutableRow.length <= 8
+          mutableRow.length <= 6
             ? this.optimizeIntersectionsByPermutation.bind(this)
             : this.optimizeIntersectionsByBarycenter;
 
@@ -183,19 +224,34 @@ export class WeaponGraphComponent<T extends WeaponType>
     return totalIntersections;
   }
 
-  isWeaponUnselectable(weapon: Weapon<T>) {
-    if (this.sourceWeapon === undefined) {
+  getWeaponElementByName(name: WeaponNameByType[T]) {
+    const element = this.weaponElementsByName.get(name);
+
+    if (element === undefined) {
+      throw Error(`Element not found for weapon "${name}"`);
+    }
+
+    return element;
+  }
+
+  isEdgeUnreachable(from: HTMLElement, to: HTMLElement) {
+    if (this.sourceWeapon() === undefined) {
       return false;
     }
 
-    return !this.possibleDestinationWeapons.has(weapon);
+    return !this.reachableEdges().get(from)?.has(to);
+  }
+
+  isWeaponUnselectable(weapon: Weapon<T>) {
+    if (this.sourceWeapon() === undefined) {
+      return false;
+    }
+
+    return !this.possibleDestinationWeapons().has(weapon);
   }
 
   onWeaponClick(weapon: Weapon<T>) {
-    this.sourceWeapon = weapon;
-    this.possibleDestinationWeapons =
-      this.weaponGraph.getWeaponDescendants(weapon);
-    console.log(this.possibleDestinationWeapons);
+    this.sourceWeapon.set(weapon);
   }
 
   optimizeIntersectionsByBarycenter(

@@ -3,3 +3,7 @@
   position: absolute;
   transform-origin: left;
 }
+
+:host(.edge--unreachable) {
+  opacity: 0.15;
+}

@@ -22,7 +22,7 @@ export default class WeaponGraph<
   }
 
   getWeaponDescendants(weapon: Weapon<T>) {
-    const descendants = new Set<Weapon<T>>([weapon, ...weapon.buildsUpInto]);
+    const descendants = new Set<Weapon<T>>([...weapon.buildsUpInto]);
 
     weapon.buildsUpInto.forEach((buildUpWeapon) => {
       this.getWeaponDescendants(buildUpWeapon).forEach((descendant) => {

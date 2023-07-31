@@ -10,13 +10,13 @@
   text-align: center;
 }
 
+:host(.weapon--unselectable) {
+  opacity: 0.5;
+}
+
 .weapon {
   &__icon {
     height: 35px;
     width: 35px;
-
-    &--unselectable {
-      background-color: yellow;
-    }
   }
 }

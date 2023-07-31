@@ -9,6 +9,7 @@ export class EdgeComponent {
   @Input() from!: HTMLElement;
   @Input() to!: HTMLElement;
 
+  @HostBinding('class.edge--unreachable') @Input() unreachable = false;
   @HostBinding('style.left') get left() {
     const left = this.getElementMiddleOffset(this.from);
     return `${left}px`;
