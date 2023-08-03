@@ -7,5 +7,7 @@ export default new Sword(
     alt: 'A double-edged, sand-colored sword with runic markings down the middle of the blade.',
     pathFragment: 'braveArk',
   },
-  new Set([darkCloud])
+  {
+    buildsUpInto: new Set([darkCloud]),
+  }
 );

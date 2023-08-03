@@ -8,5 +8,7 @@ export default new Sword(
     alt: 'A medium-sized symmetrical sword with a leather hilt.',
     pathFragment: 'gladius',
   },
-  new Set([chopper, smallSword])
+  {
+    buildsUpInto: new Set([chopper, smallSword]),
+  }
 );

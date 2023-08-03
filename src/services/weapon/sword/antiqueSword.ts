@@ -7,5 +7,7 @@ export default new Sword(
     alt: 'A long, double-edge sword with a mostly flat blade that flares at the end.',
     pathFragment: 'antiqueSword',
   },
-  new Set([braveArk])
+  {
+    buildsUpInto: new Set([braveArk]),
+  }
 );

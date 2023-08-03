@@ -7,5 +7,7 @@ export default new Sword(
     alt: 'A black sword with a spiral hole cut from the back of the blade and a thin blue hilt.',
     pathFragment: 'evilcise',
   },
-  new Set([drainSeeker])
+  {
+    buildsUpInto: new Set([drainSeeker]),
+  }
 );

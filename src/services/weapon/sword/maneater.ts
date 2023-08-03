@@ -7,5 +7,7 @@ export default new Sword(
     alt: 'A curved sword with a thick red channel with oval-shaped stones embedded in it.',
     pathFragment: 'maneater',
   },
-  new Set([atlamilliaSword])
+  {
+    buildsUpInto: new Set([atlamilliaSword]),
+  }
 );

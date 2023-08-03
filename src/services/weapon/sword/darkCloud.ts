@@ -7,5 +7,7 @@ export default new Sword(
     alt: 'A long sword with a black blade that has a white center with black emblems down the length of the blade. A hilt that looks like a mouth with sharp teeth.',
     pathFragment: 'darkCloud',
   },
-  new Set([seventhHeaven])
+  {
+    buildsUpInto: new Set([seventhHeaven]),
+  }
 );

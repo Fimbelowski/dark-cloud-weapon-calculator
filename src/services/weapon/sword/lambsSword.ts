@@ -13,5 +13,7 @@ export default new Sword(
       pathFragment: 'lambsSwordWolf',
     },
   ],
-  new Set([atlamilliaSword])
+  {
+    buildsUpInto: new Set([atlamilliaSword]),
+  }
 );

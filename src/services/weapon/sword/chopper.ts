@@ -5,5 +5,7 @@ import Sword from './Sword';
 export default new Sword(
   'Chopper',
   { alt: 'A short sword with a curvy blade.', pathFragment: 'chopper' },
-  new Set([choora, dusack])
+  {
+    buildsUpInto: new Set([choora, dusack]),
+  }
 );

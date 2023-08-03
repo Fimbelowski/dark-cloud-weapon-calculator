@@ -7,5 +7,7 @@ export default new Sword(
     alt: 'A long, double-edged sword with branches that look like smaller swords coming out of both sides of the blade.',
     pathFragment: '7BranchSword',
   },
-  new Set([atlamilliaSword])
+  {
+    buildsUpInto: new Set([atlamilliaSword]),
+  }
 );

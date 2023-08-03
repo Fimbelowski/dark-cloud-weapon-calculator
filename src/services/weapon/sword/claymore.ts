@@ -7,5 +7,7 @@ export default new Sword(
     alt: 'A long sword with a channel in the blade and a large, red hilt.',
     pathFragment: 'claymore',
   },
-  new Set([crossHeinder])
+  {
+    buildsUpInto: new Set([crossHeinder]),
+  }
 );

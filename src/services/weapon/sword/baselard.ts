@@ -8,5 +8,7 @@ export default new Sword(
     alt: 'A medium-sized, single-edged sword with a tan blade that curves slightly and has a spur on the backside.',
     pathFragment: 'baselard',
   },
-  new Set([sax, shamshir])
+  {
+    buildsUpInto: new Set([sax, shamshir]),
+  }
 );

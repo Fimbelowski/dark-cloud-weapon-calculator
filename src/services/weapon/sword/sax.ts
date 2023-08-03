@@ -7,5 +7,7 @@ export default new Sword(
     alt: 'A sword with an angular blade that has teeth like a saw. The hilt curves up and away from the blade.',
     pathFragment: 'sax',
   },
-  new Set([dusack])
+  {
+    buildsUpInto: new Set([dusack]),
+  }
 );

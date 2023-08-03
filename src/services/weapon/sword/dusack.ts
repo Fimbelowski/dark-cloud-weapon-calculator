@@ -5,5 +5,7 @@ import Sword from './Sword';
 export default new Sword(
   'Dusack',
   { alt: 'A black, slightly curved cutlass.', pathFragment: 'dusack' },
-  new Set([braveArk, sevenBranchSword])
+  {
+    buildsUpInto: new Set([braveArk, sevenBranchSword]),
+  }
 );

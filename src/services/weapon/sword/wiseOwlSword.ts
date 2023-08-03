@@ -7,5 +7,7 @@ export default new Sword(
     alt: "A silvery sword whose tip looks feathered. There is an owl's face on the hilt with a large moustache.",
     pathFragment: 'wiseOwlSword',
   },
-  new Set([lambsSword])
+  {
+    buildsUpInto: new Set([lambsSword]),
+  }
 );

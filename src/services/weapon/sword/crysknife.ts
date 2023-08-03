@@ -8,5 +8,7 @@ export default new Sword(
     alt: 'A short sword with a curvy, blue, triangle-shaped blade.',
     pathFragment: 'crysknife',
   },
-  new Set([sandBreaker, smallSword])
+  {
+    buildsUpInto: new Set([sandBreaker, smallSword]),
+  }
 );

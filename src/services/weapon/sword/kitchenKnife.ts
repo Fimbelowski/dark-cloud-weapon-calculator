@@ -8,5 +8,7 @@ export default new Sword(
     alt: 'A dark blue kitchen cleaver with a whitish edge.',
     pathFragment: 'kitchenKnife',
   },
-  new Set([chopper, sax])
+  {
+    buildsUpInto: new Set([chopper, sax]),
+  }
 );

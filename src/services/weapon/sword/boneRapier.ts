@@ -7,5 +7,7 @@ export default new Sword(
     alt: 'A very thin, ragged looking rapier with a skull and crossbones hilt.',
     pathFragment: 'boneRapier',
   },
-  new Set([evilcise])
+  {
+    buildsUpInto: new Set([evilcise]),
+  }
 );

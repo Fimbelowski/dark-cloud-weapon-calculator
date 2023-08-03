@@ -7,5 +7,7 @@ export default new Sword(
     alt: 'A short, but thick double-edged sword with a sun and moon emblem on the hilt.',
     pathFragment: 'bigBang',
   },
-  new Set([swordOfZeus])
+  {
+    buildsUpInto: new Set([swordOfZeus]),
+  }
 );

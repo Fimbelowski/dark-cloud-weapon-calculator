@@ -7,5 +7,7 @@ export default new Sword(
     alt: 'A long, single-edge sword with a notch cut out of the blade. The orangish hilt looks like the face of a cat.',
     pathFragment: 'agasSword',
   },
-  new Set([atlamilliaSword])
+  {
+    buildsUpInto: new Set([atlamilliaSword]),
+  }
 );

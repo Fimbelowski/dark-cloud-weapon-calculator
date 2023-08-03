@@ -8,5 +8,7 @@ export default new Sword(
     alt: 'A sword with a geometrically patterned blade and a hilt that looks like a man flexing his biceps.',
     pathFragment: 'machoSword',
   },
-  new Set([agasSword, crossHeinder])
+  {
+    buildsUpInto: new Set([agasSword, crossHeinder]),
+  }
 );

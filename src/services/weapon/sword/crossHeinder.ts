@@ -7,5 +7,7 @@ export default new Sword(
     alt: 'A big, golden sword shaped like  cross with a red channel throughout.',
     pathFragment: 'crossHeinder',
   },
-  new Set([bigBang])
+  {
+    buildsUpInto: new Set([bigBang]),
+  }
 );

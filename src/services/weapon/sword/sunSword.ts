@@ -7,5 +7,7 @@ export default new Sword(
     alt: 'A golden blade with a black patterned center and a sun and moon emblem on the hilt.',
     pathFragment: 'sunSword',
   },
-  new Set([bigBang])
+  {
+    buildsUpInto: new Set([bigBang]),
+  }
 );

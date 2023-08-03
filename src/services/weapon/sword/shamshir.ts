@@ -7,5 +7,7 @@ export default new Sword(
     alt: 'A gray sword with a bluish center to the blade. Very curved blade and hilt.',
     pathFragment: 'shamshir',
   },
-  new Set([dusack])
+  {
+    buildsUpInto: new Set([dusack]),
+  }
 );

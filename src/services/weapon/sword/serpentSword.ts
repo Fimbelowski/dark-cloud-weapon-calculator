@@ -8,5 +8,7 @@ export default new Sword(
     alt: 'A red sword with a white-edged blade and pentagonal holes near the tip.',
     pathFragment: 'serpentSword',
   },
-  new Set([evilcise, tsukikage])
+  {
+    buildsUpInto: new Set([evilcise, tsukikage]),
+  }
 );

@@ -8,5 +8,7 @@ export default new Sword(
     alt: 'A short swordwith a goldish blade that looks fastened to the hilt with many leather straps.',
     pathFragment: 'choora',
   },
-  new Set([heavensCloud, maneater])
+  {
+    buildsUpInto: new Set([heavensCloud, maneater]),
+  }
 );

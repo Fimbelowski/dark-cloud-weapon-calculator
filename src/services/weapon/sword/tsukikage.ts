@@ -7,5 +7,7 @@ export default new Sword(
     alt: 'A curved sword with a white leading edge and a bluish-gray trailing edge.',
     pathFragment: 'tsukikage',
   },
-  new Set([heavensCloud])
+  {
+    buildsUpInto: new Set([heavensCloud]),
+  }
 );

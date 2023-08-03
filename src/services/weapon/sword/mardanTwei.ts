@@ -7,5 +7,7 @@ export default new Sword(
     alt: 'A vividly colorful sword with a blue hilt and a red blade with an ornate eye.',
     pathFragment: 'mardanTwei',
   },
-  new Set([ariseMardan])
+  {
+    buildsUpInto: new Set([ariseMardan]),
+  }
 );
