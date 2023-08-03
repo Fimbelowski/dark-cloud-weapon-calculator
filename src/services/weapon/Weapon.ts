@@ -1,3 +1,4 @@
+import WeaponAttributeCollection from './attributes/IWeaponAttributeCollection';
 import type WeaponNameByType from './WeaponNameByType';
 import type WeaponName from './WeaponType';
 
@@ -21,9 +22,11 @@ export default abstract class Weapon<T extends WeaponName> {
 
   constructor(
     public readonly name: WeaponNameByType[T],
+    public attributes: WeaponAttributeCollection,
     iconOrIcons: Icon | Icon[],
     options?: WeaponOptions<T>
   ) {
+    this.attributes = attributes;
     this.buildsUpInto = options?.buildsUpInto ?? new Set();
     this.defaultWeapon = options?.defaultWeapon ?? false;
     this.icons = Array.isArray(iconOrIcons) ? iconOrIcons : [iconOrIcons];
