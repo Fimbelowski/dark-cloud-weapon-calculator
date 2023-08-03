@@ -6,23 +6,26 @@ interface Icon {
   pathFragment: string;
 }
 
+interface WeaponOptions<T extends WeaponName> {
+  buildsUpInto?: Set<Weapon<T>>;
+  defaultWeapon?: true;
+}
+
 export default abstract class Weapon<T extends WeaponName> {
-  buildsUpInto: Set<Weapon<T>>;
-  defaultWeapon: boolean;
-  icons: Icon[];
-  name: WeaponNameByType[T];
+  public readonly buildsUpInto: Set<Weapon<T>>;
+  public readonly defaultWeapon: boolean;
+  public readonly icons: Icon[];
 
   private static BASE_ICON_URL = '../../../assets/weapons';
   abstract ICON_URL_FOLDER: string;
 
   constructor(
-    name: WeaponNameByType[T],
+    public readonly name: WeaponNameByType[T],
     iconOrIcons: Icon | Icon[],
-    buildsUpInto = new Set<Weapon<T>>(),
-    defaultWeapon = false
+    options?: WeaponOptions<T>
   ) {
-    this.buildsUpInto = buildsUpInto;
-    this.defaultWeapon = defaultWeapon;
+    this.buildsUpInto = options?.buildsUpInto ?? new Set();
+    this.defaultWeapon = options?.defaultWeapon ?? false;
     this.icons = Array.isArray(iconOrIcons) ? iconOrIcons : [iconOrIcons];
     this.name = name;
   }
