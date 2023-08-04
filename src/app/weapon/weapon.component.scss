@@ -6,12 +6,13 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  opacity: 0.5;
   padding: 5px;
   text-align: center;
 }
 
-:host(.weapon--non-descendant) {
-  opacity: 0.5;
+:host(.weapon--on-build-up-path) {
+  opacity: 1;
 }
 
 .weapon {

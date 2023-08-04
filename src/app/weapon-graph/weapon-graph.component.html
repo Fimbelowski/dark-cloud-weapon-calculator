@@ -3,7 +3,7 @@
     (click)="onWeaponClick(weapon)"
     *ngFor="let weapon of row"
     [ngStyle]="{ 'grid-row-start': i + 1 }"
-    [nonDescendant]="!isWeaponDescendantOfSource(weapon)"
+    [onBuildUpPath]="isWeaponOnBuildUpPath(weapon)"
     [weapon]="weapon"
   />
 </ng-container>
@@ -11,7 +11,7 @@
   <app-edge
     *ngFor="let to of edge.value"
     [from]="edge.key"
+    [onBuildUpPath]="isEdgeOnBuildUpPath(edge.key, to)"
     [to]="to"
-    [unreachable]="isEdgeUnreachable(edge.key, to)"
   />
 </ng-container>
