@@ -1,13 +1,13 @@
 :host {
   align-items: center;
   background-color: inherit;
-  border: 1px solid black;
-  border-radius: 5px;
+  border: var(--border);
+  border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
   opacity: 0.5;
-  padding: 5px;
+  padding: 0.5rem;
   text-align: center;
 }
 
@@ -17,7 +17,7 @@
 
 .weapon {
   &__icon {
-    height: 35px;
-    width: 35px;
+    height: 3.5rem;
+    width: 3.5rem;
   }
 }
