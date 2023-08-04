@@ -1,9 +1,10 @@
 :host {
   border: 1px solid black;
+  opacity: 0.15;
   position: absolute;
   transform-origin: left;
 }
 
-:host(.edge--unreachable) {
-  opacity: 0.15;
+:host(.edge--on-build-up-path) {
+  opacity: 1;
 }
