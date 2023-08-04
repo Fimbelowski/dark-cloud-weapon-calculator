@@ -5,7 +5,7 @@ import graph from 'src/services/weapon/sword/graph';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['../sass/main.scss', './app.component.scss'],
 })
 export class AppComponent {
   graph = graph;
