@@ -60,20 +60,31 @@ export class WeaponGraphComponent<T extends WeaponType>
   sourceOrDestinationToSetNext: 'destination' | 'source' = 'source';
 
   weaponsOnBuildUpPath: Signal<Set<Weapon<T>>> = computed(() => {
-    const destinations = new Set<Weapon<T>>();
-
     const sourceWeapon = this.sourceWeapon();
 
-    if (sourceWeapon !== undefined) {
-      destinations.add(sourceWeapon);
-      this.weaponGraph
-        .getWeaponDescendants(sourceWeapon)
-        .forEach((descendant) => {
-          destinations.add(descendant);
-        });
+    if (sourceWeapon === undefined) {
+      // If no source weapon is selected, all weapons are potential build paths.
+      return new Set(this.weaponGraph.vertices.keys());
     }
 
-    return destinations;
+    const destinationWeapon = this.destinationWeapon();
+
+    if (destinationWeapon === undefined) {
+      // If no destination weapon is selected, all descendants of sourceWeapon are potential build paths.
+      return this.weaponGraph
+        .getWeaponDescendants(sourceWeapon)
+        .add(sourceWeapon);
+    }
+
+    const weaponsOnBuildUpPath = new Set<Weapon<T>>([sourceWeapon]);
+
+    this.getWeaponsOnBuildUpPathDfs(
+      sourceWeapon,
+      destinationWeapon,
+      weaponsOnBuildUpPath
+    );
+
+    return weaponsOnBuildUpPath;
   });
 
   edgesOnBuildUpPath: Signal<Map<HTMLElement, Set<HTMLElement>>> = computed(
@@ -88,11 +99,13 @@ export class WeaponGraphComponent<T extends WeaponType>
         }
 
         weapon.buildsUpInto.forEach((buildUpWeapon) => {
-          const buildUpWeaponElement = this.getWeaponElementByName(
-            buildUpWeapon.name
-          );
+          if (this.weaponsOnBuildUpPath().has(buildUpWeapon)) {
+            const buildUpWeaponElement = this.getWeaponElementByName(
+              buildUpWeapon.name
+            );
 
-          edgesOnBuildUpPath.get(weaponElement)?.add(buildUpWeaponElement);
+            edgesOnBuildUpPath.get(weaponElement)?.add(buildUpWeaponElement);
+          }
         });
       });
 
@@ -238,6 +251,30 @@ export class WeaponGraphComponent<T extends WeaponType>
     return element;
   }
 
+  getWeaponsOnBuildUpPathDfs(
+    source: Weapon<T>,
+    destination: Weapon<T> | undefined,
+    allWeaponsOnBuildUpPath: Set<Weapon<T>>,
+    currentBuildUpPath: Array<Weapon<T>> = []
+  ) {
+    if (source === destination) {
+      currentBuildUpPath.forEach((weapon) => {
+        allWeaponsOnBuildUpPath.add(weapon);
+      });
+    } else {
+      source.buildsUpInto.forEach((buildUpWeapon) => {
+        currentBuildUpPath.push(buildUpWeapon);
+        this.getWeaponsOnBuildUpPathDfs(
+          buildUpWeapon,
+          destination,
+          allWeaponsOnBuildUpPath,
+          currentBuildUpPath
+        );
+        currentBuildUpPath.pop();
+      });
+    }
+  }
+
   isEdgeOnBuildUpPath(from: HTMLElement, to: HTMLElement) {
     if (this.sourceWeapon() === undefined) {
       return true;
@@ -247,10 +284,6 @@ export class WeaponGraphComponent<T extends WeaponType>
   }
 
   isWeaponOnBuildUpPath(weapon: Weapon<T>) {
-    if (this.sourceWeapon() === undefined) {
-      return true;
-    }
-
     return this.weaponsOnBuildUpPath().has(weapon);
   }
 
@@ -260,13 +293,19 @@ export class WeaponGraphComponent<T extends WeaponType>
       !this.isWeaponOnBuildUpPath(weapon)
     ) {
       this.sourceWeapon.set(weapon);
-      this.destinationWeapon.set(weapon);
+      this.destinationWeapon.set(undefined);
+
+      if (weapon.buildsUpInto.size === 0) {
+        this.destinationWeapon.set(weapon);
+      }
+
       this.sourceOrDestinationToSetNext = 'destination';
       return;
     }
 
     if (this.sourceOrDestinationToSetNext === 'source') {
       this.sourceWeapon.set(weapon);
+      this.destinationWeapon.set(undefined);
       this.sourceOrDestinationToSetNext = 'destination';
       return;
     }
