@@ -1,4 +1,4 @@
-import WeaponAttributeCollection from './attributes/IWeaponAttributeCollection';
+import WeaponAttributeCollection from './attributes/WeaponAttributeCollection';
 import type WeaponNameByType from './WeaponNameByType';
 import type WeaponName from './WeaponType';
 
@@ -9,7 +9,7 @@ interface Icon {
 
 interface WeaponOptions<T extends WeaponName> {
   buildsUpInto?: Set<Weapon<T>>;
-  defaultWeapon?: true;
+  defaultWeapon?: boolean;
 }
 
 export default abstract class Weapon<T extends WeaponName> {
