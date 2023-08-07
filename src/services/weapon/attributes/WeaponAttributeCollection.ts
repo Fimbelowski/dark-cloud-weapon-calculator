@@ -1,8 +1,9 @@
+import type Cloneable from '../Cloneable';
 import type IWeaponAttributeCollection from './IWeaponAttributeCollection';
 import WeaponAttribute from './WeaponAttribute';
 
 export default class WeaponAttributeCollection
-  implements IWeaponAttributeCollection
+  implements IWeaponAttributeCollection, Cloneable<WeaponAttributeCollection>
 {
   constructor(
     public antiBeast = new WeaponAttribute(),
@@ -44,5 +45,29 @@ export default class WeaponAttributeCollection
     this.speed = speed;
     this.thunder = thunder;
     this.wind = wind;
+  }
+
+  clone() {
+    return new WeaponAttributeCollection(
+      this.antiBeast.clone(),
+      this.antiDragon.clone(),
+      this.antiMage.clone(),
+      this.antiMarine.clone(),
+      this.antiMetal.clone(),
+      this.antiMimic.clone(),
+      this.antiPlant.clone(),
+      this.antiRock.clone(),
+      this.antiSky.clone(),
+      this.antiUndead.clone(),
+      this.attack.clone(),
+      this.endurance.clone(),
+      this.fire.clone(),
+      this.holy.clone(),
+      this.ice.clone(),
+      this.magicalPower.clone(),
+      this.speed.clone(),
+      this.thunder.clone(),
+      this.wind.clone()
+    );
   }
 }
