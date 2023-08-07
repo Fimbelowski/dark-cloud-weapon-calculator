@@ -1,5 +1,15 @@
-<app-weapon-graph [weaponGraph]="weaponGraph" />
-<app-termini-options
-  [destinationWeapon]="destinationWeapon"
-  [sourceWeapon]="sourceWeapon"
+<app-weapon-graph
+  (destinationWeaponSet)="onDestinationWeaponSet($event)"
+  (sourceWeaponSet)="onSourceWeaponSet($event)"
+  [weaponGraph]="weaponGraph"
 />
+<div class="layout__termini-options">
+  <app-terminus-options
+    terminusType="Source"
+    [weapon]="sourceWeapon"
+  />
+  <app-terminus-options
+    terminusType="Destination"
+    [weapon]="destinationWeapon"
+  />
+</div>

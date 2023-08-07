@@ -3,9 +3,11 @@ import {
   Component,
   computed,
   ElementRef,
+  EventEmitter,
   HostBinding,
   Input,
   OnChanges,
+  Output,
   QueryList,
   type Signal,
   signal,
@@ -37,6 +39,9 @@ export class WeaponGraphComponent<T extends WeaponType>
   constructor(private cd: ChangeDetectorRef) {}
 
   @Input({ required: true }) weaponGraph!: Readonly<WeaponGraph<T>>;
+
+  @Output() destinationWeaponSet = new EventEmitter<Weapon<T>>();
+  @Output() sourceWeaponSet = new EventEmitter<Weapon<T>>();
 
   @HostBinding('style.grid-template-columns') get columns() {
     const columns = Math.max(...this.weaponMatrix.map((row) => row.length));
@@ -292,11 +297,10 @@ export class WeaponGraphComponent<T extends WeaponType>
       this.sourceWeapon() === undefined ||
       !this.isWeaponOnBuildUpPath(weapon)
     ) {
-      this.sourceWeapon.set(weapon);
-      this.destinationWeapon.set(undefined);
+      this.setSourceWeapon(weapon);
 
       if (weapon.buildsUpInto.size === 0) {
-        this.destinationWeapon.set(weapon);
+        this.setDestinationWeapon(weapon);
       }
 
       this.sourceOrDestinationToSetNext = 'destination';
@@ -304,13 +308,12 @@ export class WeaponGraphComponent<T extends WeaponType>
     }
 
     if (this.sourceOrDestinationToSetNext === 'source') {
-      this.sourceWeapon.set(weapon);
-      this.destinationWeapon.set(undefined);
+      this.setSourceWeapon(weapon);
       this.sourceOrDestinationToSetNext = 'destination';
       return;
     }
 
-    this.destinationWeapon.set(weapon);
+    this.setDestinationWeapon(weapon);
     this.sourceOrDestinationToSetNext = 'source';
   }
 
@@ -393,5 +396,17 @@ export class WeaponGraphComponent<T extends WeaponType>
     });
 
     return bestPermutation;
+  }
+
+  setDestinationWeapon(newDestinationWeapon: Weapon<T> | undefined) {
+    this.destinationWeapon.set(newDestinationWeapon);
+    this.destinationWeaponSet.emit(newDestinationWeapon);
+  }
+
+  setSourceWeapon(newSourceWeapon: Weapon<T>) {
+    this.sourceWeapon.set(newSourceWeapon);
+    this.sourceWeaponSet.emit(newSourceWeapon);
+
+    this.setDestinationWeapon(undefined);
   }
 }

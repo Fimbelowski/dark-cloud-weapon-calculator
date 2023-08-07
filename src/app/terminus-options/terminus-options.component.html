@@ -1,0 +1,11 @@
+<p>{{ terminusType }} Weapon</p>
+<ng-container *ngIf="isWeaponDefined(weapon); else elseBlock">
+  <app-weapon [weapon]="weapon" />
+  <form class="terminus-options__form">
+    <app-number-input
+      id="test"
+      value="0"
+    />
+  </form>
+</ng-container>
+<ng-template #elseBlock>Not Set</ng-template>
