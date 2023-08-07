@@ -1,3 +1,4 @@
+import type Cloneable from './Cloneable';
 import WeaponAttributeCollection from './attributes/WeaponAttributeCollection';
 import type WeaponNameByType from './WeaponNameByType';
 import type WeaponName from './WeaponType';
@@ -12,7 +13,9 @@ interface WeaponOptions<T extends WeaponName> {
   defaultWeapon?: boolean;
 }
 
-export default abstract class Weapon<T extends WeaponName> {
+export default abstract class Weapon<T extends WeaponName>
+  implements Cloneable<Weapon<T>>
+{
   public readonly buildsUpInto: Set<Weapon<T>>;
   public readonly defaultWeapon: boolean;
   public readonly icons: Icon[];
@@ -32,6 +35,8 @@ export default abstract class Weapon<T extends WeaponName> {
     this.icons = Array.isArray(iconOrIcons) ? iconOrIcons : [iconOrIcons];
     this.name = name;
   }
+
+  abstract clone(): Weapon<T>;
 
   getCompleteIconPath({ pathFragment }: Icon) {
     return `${Weapon.BASE_ICON_URL}/${this.ICON_URL_FOLDER}/${pathFragment}.webp`;
