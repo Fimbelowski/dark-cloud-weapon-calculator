@@ -9,6 +9,6 @@ import type WeaponName from 'src/services/weapon/WeaponType';
   styleUrls: ['./weapon.component.scss'],
 })
 export class WeaponComponent<T extends WeaponName> {
-  @HostBinding('class.weapon--on-build-up-path') @Input() onBuildUpPath = false;
+  @HostBinding('class.weapon--on-build-up-path') @Input() onBuildUpPath = true;
   @Input({ required: true }) weapon!: Weapon<T>;
 }
