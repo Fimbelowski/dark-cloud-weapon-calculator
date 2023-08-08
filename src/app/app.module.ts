@@ -8,6 +8,7 @@ import { EdgeComponent } from './edge/edge.component';
 import { LayoutComponent } from './layout/layout.component';
 import { TerminusOptionsComponent } from './terminus-options/terminus-options.component';
 import { NumberInputComponent } from './number-input/number-input.component';
+import { AttributeInputComponent } from './attribute-input/attribute-input.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { NumberInputComponent } from './number-input/number-input.component';
     LayoutComponent,
     TerminusOptionsComponent,
     NumberInputComponent,
+    AttributeInputComponent,
   ],
   imports: [BrowserModule],
   providers: [],
