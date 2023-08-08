@@ -1,12 +1,8 @@
 import type Cloneable from './Cloneable';
+import type Icon from '../Icon';
 import WeaponAttributeCollection from './attributes/WeaponAttributeCollection';
 import type WeaponNameByType from './WeaponNameByType';
 import type WeaponName from './WeaponType';
-
-interface Icon {
-  alt: string;
-  pathFragment: string;
-}
 
 interface WeaponOptions<T extends WeaponName> {
   buildsUpInto?: Set<Weapon<T>>;
