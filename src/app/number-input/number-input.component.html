@@ -1,8 +1,9 @@
-<label [htmlFor]="id">Number Input</label>
+<label [htmlFor]="id">{{ label }}</label>
 <input
   [id]="id"
   [max]="max"
   [min]="min"
+  [required]="required"
   type="number"
   [value]="value"
 />
