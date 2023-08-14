@@ -1,4 +1,4 @@
-import darkCloud from './darkCloud';
+import darkCloud from './DarkCloud';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
