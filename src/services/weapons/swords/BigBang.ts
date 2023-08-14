@@ -1,5 +1,5 @@
 import Sword from './Sword';
-import swordOfZeus from './swordOfZeus';
+import swordOfZeus from './SwordOfZeus';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
 export default class BigBang extends Sword {
