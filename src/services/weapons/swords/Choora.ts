@@ -1,5 +1,5 @@
 import heavensCloud from './HeavensCloud';
-import maneater from './maneater';
+import maneater from './Maneater';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
