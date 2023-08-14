@@ -1,5 +1,5 @@
 import Sword from './Sword';
-import tsukikage from './tsukikage';
+import tsukikage from './Tsukikage';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
 export default class SmallSword extends Sword {
