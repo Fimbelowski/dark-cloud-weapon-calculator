@@ -1,4 +1,4 @@
-import mardanTwei from './MardanTwei';
+import MardanTwei from './MardanTwei';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -30,7 +30,7 @@ export default class MardanEins extends Sword {
         pathFragment: 'mardanEins',
       },
       {
-        buildsUpInto: new Set([mardanTwei]),
+        buildsUpInto: new Set([new MardanTwei()]),
       }
     );
   }

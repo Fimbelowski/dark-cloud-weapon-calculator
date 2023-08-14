@@ -1,5 +1,5 @@
-import chopper from './Chopper';
-import smallSword from './SmallSword';
+import Chopper from './Chopper';
+import SmallSword from './SmallSword';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -23,7 +23,7 @@ export default class Gladius extends Sword {
         pathFragment: 'gladius',
       },
       {
-        buildsUpInto: new Set([chopper, smallSword]),
+        buildsUpInto: new Set([new Chopper(), new SmallSword()]),
       }
     );
   }

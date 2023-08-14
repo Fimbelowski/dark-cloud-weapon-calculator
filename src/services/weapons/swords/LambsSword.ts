@@ -1,4 +1,4 @@
-import atlamilliaSword from './AtlamilliaSword';
+import AtlamilliaSword from './AtlamilliaSword';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -31,7 +31,7 @@ export default class LambsSword extends Sword {
         },
       ],
       {
-        buildsUpInto: new Set([atlamilliaSword]),
+        buildsUpInto: new Set([new AtlamilliaSword()]),
       }
     );
   }

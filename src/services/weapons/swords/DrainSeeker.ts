@@ -1,4 +1,4 @@
-import darkCloud from './DarkCloud';
+import DarkCloud from './DarkCloud';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -28,7 +28,7 @@ export default class DrainSeeker extends Sword {
         pathFragment: 'drainSeeker',
       },
       {
-        buildsUpInto: new Set([darkCloud]),
+        buildsUpInto: new Set([new DarkCloud()]),
       }
     );
   }

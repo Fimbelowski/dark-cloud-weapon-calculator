@@ -1,5 +1,5 @@
-import chopper from './Chopper';
-import sax from './Sax';
+import Chopper from './Chopper';
+import Sax from './Sax';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -23,7 +23,7 @@ export default class KitchenKnife extends Sword {
         pathFragment: 'kitchenKnife',
       },
       {
-        buildsUpInto: new Set([chopper, sax]),
+        buildsUpInto: new Set([new Chopper(), new Sax()]),
       }
     );
   }

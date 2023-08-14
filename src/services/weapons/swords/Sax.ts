@@ -1,4 +1,4 @@
-import dusack from './Dusack';
+import Dusack from './Dusack';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -23,7 +23,7 @@ export default class Sax extends Sword {
         pathFragment: 'sax',
       },
       {
-        buildsUpInto: new Set([dusack]),
+        buildsUpInto: new Set([new Dusack()]),
       }
     );
   }

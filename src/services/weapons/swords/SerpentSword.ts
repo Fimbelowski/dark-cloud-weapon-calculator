@@ -1,6 +1,6 @@
-import evilcise from './Evilcise';
+import Evilcise from './Evilcise';
 import Sword from './Sword';
-import tsukikage from './Tsukikage';
+import Tsukikage from './Tsukikage';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
 export default class SerpentSword extends Sword {
@@ -28,7 +28,7 @@ export default class SerpentSword extends Sword {
         pathFragment: 'serpentSword',
       },
       {
-        buildsUpInto: new Set([evilcise, tsukikage]),
+        buildsUpInto: new Set([new Evilcise(), new Tsukikage()]),
       }
     );
   }

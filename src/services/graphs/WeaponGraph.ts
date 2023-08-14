@@ -1,6 +1,6 @@
 import AcyclicDirectedGraph from './AcyclicDirectedGraph';
-import type Weapon from '../weapon/Weapon';
-import type WeaponType from '../weapon/WeaponType';
+import type Weapon from '../weapons/Weapon';
+import type WeaponType from '../weapons/WeaponType';
 
 export default class WeaponGraph<
   T extends WeaponType

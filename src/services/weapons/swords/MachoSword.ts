@@ -1,5 +1,5 @@
-import agasSword from './AgasSword';
-import crossHeinder from './CrossHinder';
+import AgasSword from './AgasSword';
+import CrossHinder from './CrossHinder';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -23,7 +23,7 @@ export default class MachoSword extends Sword {
         pathFragment: 'machoSword',
       },
       {
-        buildsUpInto: new Set([agasSword, crossHeinder]),
+        buildsUpInto: new Set([new AgasSword(), new CrossHinder()]),
       }
     );
   }

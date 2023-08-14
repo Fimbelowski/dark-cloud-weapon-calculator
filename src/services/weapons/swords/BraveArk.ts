@@ -1,4 +1,4 @@
-import darkCloud from './DarkCloud';
+import DarkCloud from './DarkCloud';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -27,7 +27,7 @@ export default class BraveArk extends Sword {
         pathFragment: 'braveArk',
       },
       {
-        buildsUpInto: new Set([darkCloud]),
+        buildsUpInto: new Set([new DarkCloud()]),
       }
     );
   }

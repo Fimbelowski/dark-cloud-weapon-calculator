@@ -1,5 +1,5 @@
 import Sword from './Sword';
-import tsukikage from './Tsukikage';
+import Tsukikage from './Tsukikage';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
 export default class SmallSword extends Sword {
@@ -24,7 +24,7 @@ export default class SmallSword extends Sword {
         pathFragment: 'smallSword',
       },
       {
-        buildsUpInto: new Set([tsukikage]),
+        buildsUpInto: new Set([new Tsukikage()]),
       }
     );
   }

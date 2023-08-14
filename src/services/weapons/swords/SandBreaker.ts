@@ -1,4 +1,4 @@
-import antiqueSword from './AntiqueSword';
+import AntiqueSword from './AntiqueSword';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -26,7 +26,7 @@ export default class SandBreaker extends Sword {
         pathFragment: 'sandBreaker',
       },
       {
-        buildsUpInto: new Set([antiqueSword]),
+        buildsUpInto: new Set([new AntiqueSword()]),
       }
     );
   }

@@ -1,5 +1,5 @@
-import sax from './Sax';
-import shamshir from './Shamshir';
+import Sax from './Sax';
+import Shamshir from './Shamshir';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -23,7 +23,7 @@ export default class Baselard extends Sword {
         pathFragment: 'baselard',
       },
       {
-        buildsUpInto: new Set([sax, shamshir]),
+        buildsUpInto: new Set([new Sax(), new Shamshir()]),
       }
     );
   }

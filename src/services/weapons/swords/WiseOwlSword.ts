@@ -1,4 +1,4 @@
-import lambsSword from './LambsSword';
+import LambsSword from './LambsSword';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -24,7 +24,7 @@ export default class WiseOwlSword extends Sword {
         pathFragment: 'wiseOwlSword',
       },
       {
-        buildsUpInto: new Set([lambsSword]),
+        buildsUpInto: new Set([new LambsSword()]),
       }
     );
   }

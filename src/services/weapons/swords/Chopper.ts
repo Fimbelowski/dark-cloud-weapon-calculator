@@ -1,5 +1,5 @@
-import choora from './Choora';
-import dusack from './Dusack';
+import Choora from './Choora';
+import Dusack from './Dusack';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -23,7 +23,7 @@ export default class Chopper extends Sword {
         .build(),
       { alt: 'A short sword with a curvy blade.', pathFragment: 'chopper' },
       {
-        buildsUpInto: new Set([choora, dusack]),
+        buildsUpInto: new Set([new Choora(), new Dusack()]),
       }
     );
   }

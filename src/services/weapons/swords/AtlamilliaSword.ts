@@ -1,4 +1,4 @@
-import chronicleSword from './ChronicleSword';
+import ChronicleSword from './ChronicleSword';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -35,7 +35,7 @@ export default class AtlamilliaSword extends Sword {
         pathFragment: 'atlamilliaSword',
       },
       {
-        buildsUpInto: new Set([chronicleSword]),
+        buildsUpInto: new Set([new ChronicleSword()]),
       }
     );
   }

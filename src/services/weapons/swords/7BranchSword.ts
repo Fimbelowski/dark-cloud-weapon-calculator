@@ -1,4 +1,4 @@
-import atlamilliaSword from './AtlamilliaSword';
+import AtlamilliaSword from './AtlamilliaSword';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -24,7 +24,7 @@ export default class SevenBranchSword extends Sword {
         pathFragment: '7BranchSword',
       },
       {
-        buildsUpInto: new Set([atlamilliaSword]),
+        buildsUpInto: new Set([new AtlamilliaSword()]),
       }
     );
   }

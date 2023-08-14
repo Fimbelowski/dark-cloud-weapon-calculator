@@ -1,5 +1,5 @@
-import heavensCloud from './HeavensCloud';
-import maneater from './Maneater';
+import HeavensCloud from './HeavensCloud';
+import Maneater from './Maneater';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -23,7 +23,7 @@ export default class Choora extends Sword {
         pathFragment: 'choora',
       },
       {
-        buildsUpInto: new Set([heavensCloud, maneater]),
+        buildsUpInto: new Set([new HeavensCloud(), new Maneater()]),
       }
     );
   }

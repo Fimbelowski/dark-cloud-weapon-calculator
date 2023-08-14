@@ -1,5 +1,5 @@
 import Sword from './Sword';
-import swordOfZeus from './SwordOfZeus';
+import SwordOfZeus from './SwordOfZeus';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
 export default class BigBang extends Sword {
@@ -30,7 +30,7 @@ export default class BigBang extends Sword {
         pathFragment: 'bigBang',
       },
       {
-        buildsUpInto: new Set([swordOfZeus]),
+        buildsUpInto: new Set([new SwordOfZeus()]),
       }
     );
   }

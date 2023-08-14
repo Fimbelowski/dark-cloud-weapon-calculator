@@ -1,4 +1,4 @@
-import evilcise from './Evilcise';
+import Evilcise from './Evilcise';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -20,7 +20,7 @@ export default class BoneRapier extends Sword {
         pathFragment: 'boneRapier',
       },
       {
-        buildsUpInto: new Set([evilcise]),
+        buildsUpInto: new Set([new Evilcise()]),
       }
     );
   }

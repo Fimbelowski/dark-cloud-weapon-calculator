@@ -15,7 +15,7 @@ type SwordName =
   | 'Chronicle 2'
   | 'Chronicle Sword'
   | 'Claymore'
-  | 'Cross Heinder'
+  | 'Cross Hinder'
   | 'Crysknife'
   | 'Dagger'
   | 'Dark Cloud'

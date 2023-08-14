@@ -1,5 +1,5 @@
-import sandBreaker from './SandBreaker';
-import smallSword from './SmallSword';
+import SandBreaker from './SandBreaker';
+import SmallSword from './SmallSword';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -24,7 +24,7 @@ export default class Crysknife extends Sword {
         pathFragment: 'crysknife',
       },
       {
-        buildsUpInto: new Set([sandBreaker, smallSword]),
+        buildsUpInto: new Set([new SandBreaker(), new SmallSword()]),
       }
     );
   }

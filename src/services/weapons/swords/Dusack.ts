@@ -1,5 +1,5 @@
-import braveArk from './BraveArk';
-import sevenBranchSword from './7BranchSword';
+import BraveArk from './BraveArk';
+import SevenBranchSword from './7BranchSword';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -24,7 +24,7 @@ export default class Dusack extends Sword {
         .build(),
       { alt: 'A black, slightly curved cutlass.', pathFragment: 'dusack' },
       {
-        buildsUpInto: new Set([braveArk, sevenBranchSword]),
+        buildsUpInto: new Set([new BraveArk(), new SevenBranchSword()]),
       }
     );
   }

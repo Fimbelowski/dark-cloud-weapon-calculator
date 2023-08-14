@@ -1,4 +1,4 @@
-import bigBang from './BigBang';
+import BigBang from './BigBang';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -28,7 +28,7 @@ export default class CrossHinder extends Sword {
         pathFragment: 'crossHeinder',
       },
       {
-        buildsUpInto: new Set([bigBang]),
+        buildsUpInto: new Set([new BigBang()]),
       }
     );
   }

@@ -1,4 +1,4 @@
-import crossHeinder from './CrossHinder';
+import CrossHinder from './CrossHinder';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -29,7 +29,7 @@ export default class Claymore extends Sword {
         pathFragment: 'claymore',
       },
       {
-        buildsUpInto: new Set([crossHeinder]),
+        buildsUpInto: new Set([new CrossHinder()]),
       }
     );
   }

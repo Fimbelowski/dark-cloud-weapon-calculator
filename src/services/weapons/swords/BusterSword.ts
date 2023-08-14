@@ -1,4 +1,4 @@
-import claymore from './Claymore';
+import Claymore from './Claymore';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -23,7 +23,7 @@ export default class BusterSword extends Sword {
         pathFragment: 'busterSword',
       },
       {
-        buildsUpInto: new Set([claymore]),
+        buildsUpInto: new Set([new Claymore()]),
       }
     );
   }

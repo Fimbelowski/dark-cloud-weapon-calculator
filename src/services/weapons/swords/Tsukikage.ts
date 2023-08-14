@@ -1,4 +1,4 @@
-import heavensCloud from './HeavensCloud';
+import HeavensCloud from './HeavensCloud';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -27,7 +27,7 @@ export default class Tsukikage extends Sword {
         pathFragment: 'tsukikage',
       },
       {
-        buildsUpInto: new Set([heavensCloud]),
+        buildsUpInto: new Set([new HeavensCloud()]),
       }
     );
   }

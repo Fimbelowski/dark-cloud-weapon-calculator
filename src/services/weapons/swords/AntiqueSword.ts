@@ -1,4 +1,4 @@
-import braveArk from './BraveArk';
+import BraveArk from './BraveArk';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -26,7 +26,7 @@ export default class AntiqueSword extends Sword {
         pathFragment: 'antiqueSword',
       },
       {
-        buildsUpInto: new Set([braveArk]),
+        buildsUpInto: new Set([new BraveArk()]),
       }
     );
   }

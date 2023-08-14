@@ -1,4 +1,4 @@
-import drainSeeker from './DrainSeeker';
+import DrainSeeker from './DrainSeeker';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -26,7 +26,7 @@ export default class Evilcise extends Sword {
         pathFragment: 'evilcise',
       },
       {
-        buildsUpInto: new Set([drainSeeker]),
+        buildsUpInto: new Set([new DrainSeeker()]),
       }
     );
   }

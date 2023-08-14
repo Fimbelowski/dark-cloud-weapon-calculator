@@ -1,4 +1,4 @@
-import seventhHeaven from './7thHeaven';
+import SeventhHeaven from './7thHeaven';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
@@ -25,7 +25,7 @@ export default class DarkCloud extends Sword {
         pathFragment: 'darkCloud',
       },
       {
-        buildsUpInto: new Set([seventhHeaven]),
+        buildsUpInto: new Set([new SeventhHeaven()]),
       }
     );
   }
