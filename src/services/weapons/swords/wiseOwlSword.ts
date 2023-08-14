@@ -1,4 +1,4 @@
-import lambsSword from './lambsSword';
+import lambsSword from './LambsSword';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
