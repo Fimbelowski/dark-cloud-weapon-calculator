@@ -1,4 +1,4 @@
-import atlamilliaSword from './atlamilliaSword';
+import atlamilliaSword from './AtlamilliaSword';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
