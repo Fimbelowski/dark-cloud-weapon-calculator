@@ -4,26 +4,24 @@ import WeaponAttributeWithMin from '../attributes/WeaponAttributeWithMin';
 import WeaponAttributeWithMinAndMax from '../attributes/WeaponAttributeWithMinAndMax';
 import WeaponAttributeCollection from '../attributes/WeaponAttributeCollection';
 
-export default class Dagger extends Sword {
+export default class Sax extends Sword {
   constructor() {
     super(
-      'Dagger',
+      'Sax',
       new WeaponAttributeCollection(
-        new WeaponAttributeWithMinAndMax(6, 25),
-        new WeaponAttributeWithMin(30),
-        new WeaponAttributeWithMin(70),
-        new WeaponAttributeWithMinAndMax(2, 24),
+        new WeaponAttributeWithMinAndMax(26, 65),
+        new WeaponAttributeWithMin(40),
+        new WeaponAttributeWithMin(50),
+        new WeaponAttributeWithMinAndMax(15, 41),
         {
           // Elemental attributes
-          wind: new WeaponAttributeWithMaybeMin(4),
+          thunder: new WeaponAttributeWithMaybeMin(10),
 
           // Anti-monster attributes
-          antiBeast: new WeaponAttributeWithMaybeMin(4),
+          antiPlant: new WeaponAttributeWithMaybeMin(10),
+          antiMimic: new WeaponAttributeWithMaybeMin(10),
         }
-      ),
-      {
-        defaultWeapon: true,
-      }
+      )
     );
   }
 }

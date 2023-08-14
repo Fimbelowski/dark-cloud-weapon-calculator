@@ -7,7 +7,7 @@ export default abstract class Sword extends Weapon<WeaponType.Sword> {
   constructor(
     name: SwordName,
     attributes: WeaponAttributeCollection,
-    options?: WeaponOptions
+    options?: WeaponOptions<WeaponType.Sword>
   ) {
     super(name, attributes, options);
   }
