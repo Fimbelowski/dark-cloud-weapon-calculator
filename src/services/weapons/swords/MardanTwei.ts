@@ -1,17 +1,17 @@
-import mardanTwei from './MardanTwei';
+import ariseMardan from './AriseMardan';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
-export default class MardanEins extends Sword {
+export default class MardanTwei extends Sword {
   constructor() {
     super(
-      'Mardan Eins',
+      'Mardan Twei',
       new WeaponAttributeCollectionBuilder()
         // Base Attributes
-        .withAttribute('attack', (a) => a.withMin(50).withMax(70))
+        .withAttribute('attack', (a) => a.withMin(50))
         .withAttribute('endurance', (a) => a.withMin(50))
         .withAttribute('speed', (a) => a.withMin(50))
-        .withAttribute('magicalPower', (a) => a.withMin(50).withMax(65))
+        .withAttribute('magicalPower', (a) => a.withMin(50))
         // Elemental Attributes
         .withAttribute('fire', (a) => a.withMin(5))
         .withAttribute('ice', (a) => a.withMin(5))
@@ -26,11 +26,11 @@ export default class MardanEins extends Sword {
         .withAttribute('antiMimic', (a) => a.withMin(10))
         .build(),
       {
-        alt: 'An ornate sword with a blue hilt and a light blue blade with an ornate eye.',
-        pathFragment: 'mardanEins',
+        alt: 'A vividly colorful sword with a blue hilt and a red blade with an ornate eye.',
+        pathFragment: 'mardanTwei',
       },
       {
-        buildsUpInto: new Set([mardanTwei]),
+        buildsUpInto: new Set([ariseMardan]),
       }
     );
   }
