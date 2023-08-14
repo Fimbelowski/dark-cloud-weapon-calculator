@@ -5,7 +5,7 @@ import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeColle
 export default class CrossHinder extends Sword {
   constructor() {
     super(
-      'Cross Heinder',
+      'Cross Hinder',
       new WeaponAttributeCollectionBuilder()
         // Base Attributes
         .withAttribute('attack', (a) => a.withMin(68).withMax(110))
