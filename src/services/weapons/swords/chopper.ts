@@ -1,4 +1,4 @@
-import choora from './choora';
+import choora from './Choora';
 import dusack from './dusack';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
