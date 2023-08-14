@@ -1,4 +1,4 @@
-import chopper from './chopper';
+import chopper from './Chopper';
 import sax from './sax';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
