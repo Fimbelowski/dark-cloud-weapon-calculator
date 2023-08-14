@@ -1,4 +1,4 @@
-import evilcise from './evilcise';
+import evilcise from './Evilcise';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
