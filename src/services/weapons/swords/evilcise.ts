@@ -1,4 +1,4 @@
-import drainSeeker from './drainSeeker';
+import drainSeeker from './DrainSeeker';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
