@@ -1,7 +1,7 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
-import type Weapon from 'src/services/weapon/Weapon';
-import type WeaponName from 'src/services/weapon/WeaponType';
+import type Weapon from 'src/services/weapons/Weapon';
+import type WeaponName from 'src/services/weapons/WeaponType';
 
 @Component({
   selector: 'app-weapon',

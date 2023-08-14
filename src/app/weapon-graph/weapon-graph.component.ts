@@ -18,11 +18,11 @@ import arrayAverage from '../utilities/arrayAverage';
 import countInversions from '../utilities/countInversions';
 import heapsAlgorithm from '../utilities/heapsAlgorithm';
 import shuffleArray from '../utilities/shuffleArray';
-import type Weapon from 'src/services/weapon/Weapon';
+import type Weapon from 'src/services/weapons/Weapon';
 import { WeaponComponent } from '../weapon/weapon.component';
 import type WeaponGraph from 'src/services/graphs/WeaponGraph';
-import type WeaponType from 'src/services/weapon/WeaponType';
-import type WeaponNameByType from 'src/services/weapon/WeaponNameByType';
+import type WeaponType from 'src/services/weapons/WeaponType';
+import type WeaponNameByType from 'src/services/weapons/WeaponNameByType';
 
 type SweepDirection = 'down' | 'up';
 

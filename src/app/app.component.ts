@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import graph from 'src/services/weapon/sword/graph';
+import graph from 'src/services/weapons/swords/graph';
 
 @Component({
   selector: 'app-root',
