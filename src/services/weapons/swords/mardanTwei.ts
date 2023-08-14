@@ -1,4 +1,4 @@
-import ariseMardan from './ariseMardan';
+import ariseMardan from './AriseMardan';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
