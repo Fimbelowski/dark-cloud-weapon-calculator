@@ -33,7 +33,10 @@ export default class Dagger extends Sword {
           antiMimic: new WeaponAttributeWithMaybeMin(),
           antiMage: new WeaponAttributeWithMaybeMin(),
         }
-      )
+      ),
+      {
+        defaultWeapon: true,
+      }
     );
   }
 }
