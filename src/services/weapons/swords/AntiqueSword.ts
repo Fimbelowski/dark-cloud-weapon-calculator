@@ -1,4 +1,4 @@
-import braveArk from './braveArk';
+import braveArk from './BraveArk';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
