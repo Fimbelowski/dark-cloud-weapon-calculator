@@ -1,4 +1,4 @@
-import bigBang from './bigBang';
+import bigBang from './BigBang';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
