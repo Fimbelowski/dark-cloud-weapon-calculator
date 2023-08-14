@@ -1,5 +1,5 @@
 import sax from './Sax';
-import shamshir from './shamshir';
+import shamshir from './Shamshir';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
