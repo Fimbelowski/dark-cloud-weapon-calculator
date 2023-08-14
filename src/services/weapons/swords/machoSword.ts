@@ -1,4 +1,4 @@
-import agasSword from './agasSword';
+import agasSword from './AgasSword';
 import crossHeinder from './crossHeinder';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
