@@ -1,4 +1,4 @@
-import claymore from './claymore';
+import claymore from './Claymore';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
