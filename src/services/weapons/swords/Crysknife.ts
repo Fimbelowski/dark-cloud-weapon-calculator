@@ -1,4 +1,4 @@
-import sandBreaker from './sandBreaker';
+import sandBreaker from './SandBreaker';
 import smallSword from './smallSword';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
