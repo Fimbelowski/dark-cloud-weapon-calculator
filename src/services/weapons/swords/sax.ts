@@ -1,4 +1,4 @@
-import dusack from './dusack';
+import dusack from './Dusack';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
