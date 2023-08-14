@@ -2,7 +2,7 @@ import claymore from './Claymore';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
-export default class AgasSword extends Sword {
+export default class BusterSword extends Sword {
   constructor() {
     super(
       'Buster Sword',

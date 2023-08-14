@@ -2,7 +2,7 @@ import Sword from './Sword';
 import swordOfZeus from './swordOfZeus';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
-export default class AgasSword extends Sword {
+export default class BigBang extends Sword {
   constructor() {
     super(
       'Big Bang',

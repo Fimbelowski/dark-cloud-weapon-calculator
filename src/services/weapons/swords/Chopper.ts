@@ -3,7 +3,7 @@ import dusack from './dusack';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
-export default class AgasSword extends Sword {
+export default class Chopper extends Sword {
   constructor() {
     super(
       'Chopper',

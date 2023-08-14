@@ -3,7 +3,7 @@ import shamshir from './shamshir';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
-export default class AgasSword extends Sword {
+export default class Baselard extends Sword {
   constructor() {
     super(
       'Baselard',

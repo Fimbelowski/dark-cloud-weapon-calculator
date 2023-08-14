@@ -2,7 +2,7 @@ import darkCloud from './darkCloud';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
-export default class AgasSword extends Sword {
+export default class BraveArk extends Sword {
   constructor() {
     super(
       'Brave Ark',

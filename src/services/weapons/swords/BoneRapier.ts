@@ -2,7 +2,7 @@ import evilcise from './evilcise';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
-export default class AgasSword extends Sword {
+export default class BoneRapier extends Sword {
   constructor() {
     super(
       'Bone Rapier',

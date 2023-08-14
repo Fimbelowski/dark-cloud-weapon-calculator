@@ -1,7 +1,7 @@
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
-export default class AgasSword extends Sword {
+export default class ChronicleSword extends Sword {
   constructor() {
     super(
       'Chronicle Sword',

@@ -3,7 +3,7 @@ import maneater from './maneater';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
-export default class AgasSword extends Sword {
+export default class Choora extends Sword {
   constructor() {
     super(
       'Choora',
