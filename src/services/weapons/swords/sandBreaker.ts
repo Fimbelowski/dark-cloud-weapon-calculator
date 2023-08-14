@@ -1,4 +1,4 @@
-import antiqueSword from './antiqueSword';
+import antiqueSword from './AntiqueSword';
 import Sword from './Sword';
 import WeaponAttributeCollectionBuilder from '../attributes/WeaponAttributeCollectionBuilder';
 
