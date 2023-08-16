@@ -1,18 +1,18 @@
 import WeaponAttributeCollection from './attributes/IWeaponAttributeCollection';
 import type WeaponNameByType from './WeaponNameByType';
-import type WeaponName from './WeaponType';
+import type WeaponType from './WeaponType';
 
 interface Icon {
   alt: string;
   pathFragment: string;
 }
 
-interface WeaponOptions<T extends WeaponName> {
+interface WeaponOptions<T extends WeaponType> {
   buildsUpInto?: Set<Weapon<T>>;
   defaultWeapon?: true;
 }
 
-export default abstract class Weapon<T extends WeaponName> {
+export default abstract class Weapon<T extends WeaponType> {
   public readonly buildsUpInto: Set<Weapon<T>>;
   public readonly defaultWeapon: boolean;
   public readonly icons: Icon[];
