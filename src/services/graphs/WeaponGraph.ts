@@ -1,10 +1,14 @@
 import AcyclicDirectedGraph from './AcyclicDirectedGraph';
 import type Weapon from '../weapons/Weapon';
+import WeaponMap from '../weapons/WeaponMap';
+import WeaponMatrix from '../weapons/WeaponMatrix';
 import type WeaponType from '../weapons/WeaponType';
 
 export default class WeaponGraph<
   T extends WeaponType
 > extends AcyclicDirectedGraph<Weapon<T>> {
+  private weaponMap = new WeaponMap<T>();
+
   constructor(...weapons: Array<Weapon<T>>) {
     super();
 
@@ -14,19 +18,27 @@ export default class WeaponGraph<
   }
 
   addWeapon(weapon: Weapon<T>) {
-    this.addVertex(weapon);
+    const weaponFromMap = this.weaponMap.getWeapon(weapon);
+    this.addVertex(weaponFromMap);
 
-    for (const buildUpWeapon of weapon.buildsUpInto) {
-      this.addEdge(weapon, buildUpWeapon);
+    for (const buildUpWeapon of weaponFromMap.buildsUpInto) {
+      const buildUpWeaponFromMap = this.weaponMap.getWeapon(buildUpWeapon);
+      this.addEdge(weaponFromMap, buildUpWeaponFromMap);
     }
   }
 
   getWeaponDescendants(weapon: Weapon<T>) {
-    const descendants = new Set<Weapon<T>>([...weapon.buildsUpInto]);
+    const descendants = new Set<Weapon<T>>();
+
+    weapon.buildsUpInto.forEach((buildUpWeapon) => {
+      const buildUpWeaponFromMap = this.weaponMap.getWeapon(buildUpWeapon);
+      descendants.add(buildUpWeaponFromMap);
+    });
 
     weapon.buildsUpInto.forEach((buildUpWeapon) => {
       this.getWeaponDescendants(buildUpWeapon).forEach((descendant) => {
-        descendants.add(descendant);
+        const descendantFromMap = this.weaponMap.getWeapon(descendant);
+        descendants.add(descendantFromMap);
       });
     });
 
@@ -43,5 +55,9 @@ export default class WeaponGraph<
     }
 
     return this.getVertexLongestDistanceFromLeaf(weapon);
+  }
+
+  toMatrix() {
+    return new WeaponMatrix(this, this.weaponMap).matrix;
   }
 }

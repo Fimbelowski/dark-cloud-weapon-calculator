@@ -17,6 +17,7 @@ import {
 import arrayAverage from '../utilities/arrayAverage';
 import countInversions from '../utilities/countInversions';
 import heapsAlgorithm from '../utilities/heapsAlgorithm';
+import type { IWeaponMatrix } from 'src/services/weapons/IWeaponMatrix';
 import shuffleArray from '../utilities/shuffleArray';
 import type Weapon from 'src/services/weapons/Weapon';
 import { WeaponComponent } from '../weapon/weapon.component';
@@ -52,7 +53,7 @@ export class WeaponGraphComponent<T extends WeaponType>
   children!: QueryList<ElementRef>;
 
   edges = new Map<HTMLElement, Set<HTMLElement>>();
-  weaponMatrix: Array<Array<Weapon<T>>> = [];
+  weaponMatrix: IWeaponMatrix<T> = [];
   weaponElementsByName = new Map<WeaponNameByType[T], HTMLElement>();
 
   destinationWeapon: WritableSignal<Weapon<T> | undefined> = signal(undefined);
@@ -114,7 +115,7 @@ export class WeaponGraphComponent<T extends WeaponType>
   );
 
   ngOnChanges() {
-    this.buildWeaponMatrix();
+    this.weaponMatrix = this.weaponGraph.toMatrix();
   }
 
   ngAfterViewInit() {
