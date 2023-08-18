@@ -1,9 +1,10 @@
 import arrayAverage from 'src/app/utilities/arrayAverage';
 import countInversions from 'src/app/utilities/countInversions';
 import heapsAlgorithm from 'src/app/utilities/heapsAlgorithm';
+import isSameClass from 'src/utilities/isSameClass';
+import setHasSameClass from 'src/utilities/setHasSameClass';
 import shuffleArray from 'src/app/utilities/shuffleArray';
 import type WeaponGraph from '../graphs/WeaponGraph';
-import type WeaponMap from './WeaponMap';
 import type { IWeaponMatrix, WeaponMatrixRow } from './IWeaponMatrix';
 import type WeaponType from './WeaponType';
 
@@ -12,20 +13,15 @@ type SweepDirection = 'down' | 'up';
 export default class WeaponMatrix<T extends WeaponType> {
   public readonly matrix: IWeaponMatrix<T> = [];
 
-  constructor(
-    private readonly weaponGraph: WeaponGraph<T>,
-    private readonly weaponMap: WeaponMap<T>
-  ) {
+  constructor(private readonly weaponGraph: WeaponGraph<T>) {
     this.weaponGraph.vertices.forEach((vertex, weapon) => {
-      const weaponFromMap = this.weaponMap.getWeapon(weapon);
-      const depth =
-        this.weaponGraph.getWeaponLongestDistanceFromLeaf(weaponFromMap);
+      const depth = this.weaponGraph.getWeaponLongestDistanceFromLeaf(weapon);
 
       if (this.matrix[depth] === undefined) {
         this.matrix[depth] = [];
       }
 
-      this.matrix[depth].push(weaponFromMap);
+      this.matrix[depth].push(weapon);
     });
 
     this.matrix.reverse();
@@ -83,8 +79,11 @@ export default class WeaponMatrix<T extends WeaponType> {
 
     upperRow.forEach(({ buildsUpInto }, sourceIndex) => {
       buildsUpInto.forEach((buildUpWeapon) => {
-        const buildUpWeaponFromMap = this.weaponMap.getWeapon(buildUpWeapon);
-        edges.push([sourceIndex, lowerRow.indexOf(buildUpWeaponFromMap)]);
+        const buildUpWeaponIndex = lowerRow.findIndex((lowerRowWeapon) =>
+          isSameClass(buildUpWeapon, lowerRowWeapon)
+        );
+
+        edges.push([sourceIndex, buildUpWeaponIndex]);
       });
     });
 
@@ -116,39 +115,26 @@ export default class WeaponMatrix<T extends WeaponType> {
     const tempMutableRow = mutableRow.slice();
 
     tempMutableRow.sort((a, b) => {
-      const aFromMap = this.weaponMap.getWeapon(a);
-      const bFromMap = this.weaponMap.getWeapon(b);
-
       const aAdjacentIndices: number[] = [];
       const bAdjacentIndices: number[] = [];
 
       for (let i = 0; i < fixedRow.length; i++) {
-        const fixedRowWeaponFromMap = this.weaponMap.getWeapon(fixedRow[i]);
-        const fixedRowWeaponBuildsUpIntoFromMap =
-          this.weaponMap.getWeaponBuildsUpInto(fixedRowWeaponFromMap);
+        const fixedRowWeapon = fixedRow[i];
 
         if (sweepDirection === 'down') {
-          if (fixedRowWeaponBuildsUpIntoFromMap.has(aFromMap)) {
+          if (setHasSameClass(fixedRowWeapon.buildsUpInto, a)) {
             aAdjacentIndices.push(i);
           }
 
-          if (fixedRowWeaponBuildsUpIntoFromMap.has(bFromMap)) {
+          if (setHasSameClass(fixedRowWeapon.buildsUpInto, b)) {
             bAdjacentIndices.push(i);
           }
         } else {
-          if (
-            this.weaponMap
-              .getWeaponBuildsUpInto(aFromMap)
-              .has(fixedRowWeaponFromMap)
-          ) {
+          if (setHasSameClass(a.buildsUpInto, fixedRowWeapon)) {
             aAdjacentIndices.push(i);
           }
 
-          if (
-            this.weaponMap
-              .getWeaponBuildsUpInto(bFromMap)
-              .has(fixedRowWeaponFromMap)
-          ) {
+          if (setHasSameClass(b.buildsUpInto, fixedRowWeapon)) {
             bAdjacentIndices.push(i);
           }
         }
