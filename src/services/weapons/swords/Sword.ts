@@ -1,6 +1,6 @@
 import Weapon from '../Weapon';
 
-export default class Sword extends Weapon<'sword'> {
+export default abstract class Sword extends Weapon<'sword'> {
   ICON_URL_FOLDER = 'swords';
 
   constructor(...args: ConstructorParameters<typeof Weapon<'sword'>>) {
