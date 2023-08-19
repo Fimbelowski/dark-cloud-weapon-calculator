@@ -3,7 +3,6 @@ import type Weapon from '../weapons/Weapon';
 import WeaponMatrix from '../weapons/WeaponMatrix';
 import type WeaponNameByType from '../weapons/WeaponNameByType';
 import type WeaponType from '../weapons/WeaponType';
-import isSameClass from 'src/utilities/isSameClass';
 
 export default class WeaponGraph<
   T extends WeaponType
@@ -22,33 +21,33 @@ export default class WeaponGraph<
     const weaponFromMap = this.getWeaponFromMap(weapon);
     this.addVertex(weaponFromMap);
 
-    for (const buildUpWeapon of weapon.buildsUpInto) {
+    weapon.buildsUpInto.forEach((buildUpWeapon) => {
       const buildUpWeaponFromMap = this.getWeaponFromMap(buildUpWeapon);
       this.addEdge(weaponFromMap, buildUpWeaponFromMap);
-    }
+    });
   }
 
   getWeaponBuildUpOptions(
     sourceWeapon: Weapon<T> | undefined,
     destinationWeapon: Weapon<T> | undefined
   ) {
-    const buildUpOptions = new Set<Weapon<T>>();
+    const buildUpOptions = new Map<WeaponNameByType[T], Weapon<T>>();
 
     if (sourceWeapon === undefined) {
       this.vertices.forEach((vertex, weapon) => {
-        buildUpOptions.add(weapon);
+        buildUpOptions.set(weapon.name, weapon);
       });
 
       return buildUpOptions;
     }
 
-    buildUpOptions.add(sourceWeapon);
+    buildUpOptions.set(sourceWeapon.name, sourceWeapon);
 
     if (destinationWeapon === undefined) {
-      buildUpOptions.add(sourceWeapon);
+      buildUpOptions.set(sourceWeapon.name, sourceWeapon);
 
       this.getWeaponDescendants(sourceWeapon).forEach((descendant) => {
-        buildUpOptions.add(descendant);
+        buildUpOptions.set(descendant.name, descendant);
       });
 
       return buildUpOptions;
@@ -66,12 +65,12 @@ export default class WeaponGraph<
   private getWeaponBuildUpOptionsDfs(
     sourceWeapon: Weapon<T>,
     destinationWeapon: Weapon<T>,
-    buildUpOptions: Set<Weapon<T>>,
+    buildUpOptions: Map<WeaponNameByType[T], Weapon<T>>,
     buildUpOptionsStack: Array<Weapon<T>> = []
   ) {
-    if (isSameClass(sourceWeapon, destinationWeapon)) {
+    if (sourceWeapon.is(destinationWeapon)) {
       buildUpOptionsStack.forEach((weapon) => {
-        buildUpOptions.add(weapon);
+        buildUpOptions.set(weapon.name, weapon);
       });
     } else {
       sourceWeapon.buildsUpInto.forEach((buildUpWeapon) => {
