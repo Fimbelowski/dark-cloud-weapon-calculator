@@ -13,7 +13,7 @@ interface WeaponOptions<T extends WeaponType> {
 }
 
 export default abstract class Weapon<T extends WeaponType> {
-  public readonly buildsUpInto: Set<Weapon<T>>;
+  public readonly buildsUpInto = new Map<WeaponNameByType[T], Weapon<T>>();
   public readonly defaultWeapon: boolean;
   public readonly icons: Icon[];
 
@@ -26,14 +26,21 @@ export default abstract class Weapon<T extends WeaponType> {
     iconOrIcons: Icon | Icon[],
     options?: WeaponOptions<T>
   ) {
-    this.attributes = attributes;
-    this.buildsUpInto = options?.buildsUpInto ?? new Set();
-    this.defaultWeapon = options?.defaultWeapon ?? false;
     this.icons = Array.isArray(iconOrIcons) ? iconOrIcons : [iconOrIcons];
-    this.name = name;
+
+    const buildsUpInto = options?.buildsUpInto ?? new Set();
+    buildsUpInto.forEach((weapon) => {
+      this.buildsUpInto.set(weapon.name, weapon);
+    });
+
+    this.defaultWeapon = options?.defaultWeapon ?? false;
   }
 
-  getCompleteIconPath({ pathFragment }: Icon) {
+  public getCompleteIconPath({ pathFragment }: Icon) {
     return `${Weapon.BASE_ICON_URL}/${this.ICON_URL_FOLDER}/${pathFragment}.webp`;
+  }
+
+  public is(weapon: Weapon<T>) {
+    return this.name === weapon.name;
   }
 }

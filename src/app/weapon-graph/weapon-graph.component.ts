@@ -15,7 +15,6 @@ import {
 } from '@angular/core';
 
 import type { IWeaponMatrix } from 'src/services/weapons/IWeaponMatrix';
-import setHasSameClass from 'src/utilities/setHasSameClass';
 import type Weapon from 'src/services/weapons/Weapon';
 import { WeaponComponent } from '../weapon/weapon.component';
 import type WeaponGraph from 'src/services/graphs/WeaponGraph';
@@ -55,7 +54,7 @@ export class WeaponGraphComponent<T extends WeaponType>
   sourceWeapon: WritableSignal<Weapon<T> | undefined> = signal(undefined);
   sourceOrDestinationToSetNext: 'destination' | 'source' = 'source';
 
-  buildUpOptions: Signal<Set<Weapon<T>>> = computed(() =>
+  buildUpOptions: Signal<Map<WeaponNameByType[T], Weapon<T>>> = computed(() =>
     this.weaponGraph.getWeaponBuildUpOptions(
       this.sourceWeapon(),
       this.destinationWeapon()
@@ -74,7 +73,7 @@ export class WeaponGraphComponent<T extends WeaponType>
         }
 
         weapon.buildsUpInto.forEach((buildUpWeapon) => {
-          if (setHasSameClass(this.buildUpOptions(), buildUpWeapon)) {
+          if (this.buildUpOptions().has(buildUpWeapon.name)) {
             const buildUpWeaponElement = this.getWeaponElementByName(
               buildUpWeapon.name
             );
@@ -140,8 +139,8 @@ export class WeaponGraphComponent<T extends WeaponType>
     return this.edgesOnBuildUpPath().get(from)?.has(to) ?? false;
   }
 
-  isWeaponOnBuildUpPath(weapon: Weapon<T>) {
-    return setHasSameClass(this.buildUpOptions(), weapon);
+  isWeaponOnBuildUpPath({ name }: Weapon<T>) {
+    return this.buildUpOptions().has(name);
   }
 
   onWeaponClick(weapon: Weapon<T>) {

@@ -1,8 +1,6 @@
 import arrayAverage from 'src/app/utilities/arrayAverage';
 import countInversions from 'src/app/utilities/countInversions';
 import heapsAlgorithm from 'src/app/utilities/heapsAlgorithm';
-import isSameClass from 'src/utilities/isSameClass';
-import setHasSameClass from 'src/utilities/setHasSameClass';
 import shuffleArray from 'src/app/utilities/shuffleArray';
 import type WeaponGraph from '../graphs/WeaponGraph';
 import type { IWeaponMatrix, WeaponMatrixRow } from './IWeaponMatrix';
@@ -80,7 +78,7 @@ export default class WeaponMatrix<T extends WeaponType> {
     upperRow.forEach(({ buildsUpInto }, sourceIndex) => {
       buildsUpInto.forEach((buildUpWeapon) => {
         const buildUpWeaponIndex = lowerRow.findIndex((lowerRowWeapon) =>
-          isSameClass(buildUpWeapon, lowerRowWeapon)
+          lowerRowWeapon.is(buildUpWeapon)
         );
 
         edges.push([sourceIndex, buildUpWeaponIndex]);
@@ -122,19 +120,19 @@ export default class WeaponMatrix<T extends WeaponType> {
         const fixedRowWeapon = fixedRow[i];
 
         if (sweepDirection === 'down') {
-          if (setHasSameClass(fixedRowWeapon.buildsUpInto, a)) {
+          if (fixedRowWeapon.buildsUpInto.has(a.name)) {
             aAdjacentIndices.push(i);
           }
 
-          if (setHasSameClass(fixedRowWeapon.buildsUpInto, b)) {
+          if (fixedRowWeapon.buildsUpInto.has(b.name)) {
             bAdjacentIndices.push(i);
           }
         } else {
-          if (setHasSameClass(a.buildsUpInto, fixedRowWeapon)) {
+          if (a.buildsUpInto.has(fixedRowWeapon.name)) {
             aAdjacentIndices.push(i);
           }
 
-          if (setHasSameClass(b.buildsUpInto, fixedRowWeapon)) {
+          if (b.buildsUpInto.has(fixedRowWeapon.name)) {
             bAdjacentIndices.push(i);
           }
         }
