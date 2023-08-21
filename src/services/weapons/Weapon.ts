@@ -23,6 +23,7 @@ export default abstract class Weapon<T extends WeaponType> {
   constructor(
     public readonly name: WeaponNameByType[T],
     public attributes: WeaponAttributeCollection,
+    public readonly slots: 2 | 3 | 4 | 5,
     iconOrIcons: Icon | Icon[],
     options?: WeaponOptions<T>
   ) {
