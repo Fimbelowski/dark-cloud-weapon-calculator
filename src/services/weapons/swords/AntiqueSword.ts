@@ -21,6 +21,7 @@ export default class AntiqueSword extends Sword {
         .withAttribute('antiRock', (a) => a.withMin(10))
         .withAttribute('antiMimic', (a) => a.withMin(10))
         .build(),
+      3,
       {
         alt: 'A long, double-edge sword with a mostly flat blade that flares at the end.',
         pathFragment: 'antiqueSword',

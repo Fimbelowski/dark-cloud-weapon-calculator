@@ -24,6 +24,7 @@ export default class AriseMardan extends Sword {
         .withAttribute('antiRock', (a) => a.withMin(10))
         .withAttribute('antiMimic', (a) => a.withMin(10))
         .build(),
+      3,
       {
         alt: "A long, single-edge blade. Blue throughout with gold and red on the back edge of the blade and an eye halfway along the blade's length.",
         pathFragment: 'ariseMardan',

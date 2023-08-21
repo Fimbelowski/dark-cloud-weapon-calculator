@@ -25,6 +25,7 @@ export default class BigBang extends Sword {
         .withAttribute('antiMetal', (a) => a.withMin(40))
         .withAttribute('antiMage', (a) => a.withMin(40))
         .build(),
+      3,
       {
         alt: 'A short, but thick double-edged sword with a sun and moon emblem on the hilt.',
         pathFragment: 'bigBang',

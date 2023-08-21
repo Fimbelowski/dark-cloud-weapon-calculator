@@ -19,6 +19,7 @@ export default class Crysknife extends Sword {
         .withAttribute('antiBeast', (a) => a.withMin(5))
         .withAttribute('antiSky', (a) => a.withMin(5))
         .build(),
+      3,
       {
         alt: 'A short sword with a curvy, blue, triangle-shaped blade.',
         pathFragment: 'crysknife',

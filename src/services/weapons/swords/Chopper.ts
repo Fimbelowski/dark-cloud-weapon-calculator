@@ -21,6 +21,7 @@ export default class Chopper extends Sword {
         .withAttribute('antiMetal', (a) => a.withMin(10))
         .withAttribute('antiMage', (a) => a.withMin(10))
         .build(),
+      4,
       { alt: 'A short sword with a curvy blade.', pathFragment: 'chopper' },
       {
         buildsUpInto: new Set([new Choora(), new Dusack()]),

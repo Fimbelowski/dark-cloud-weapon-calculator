@@ -24,6 +24,7 @@ export default class Claymore extends Sword {
         .withAttribute('antiMimic', (a) => a.withMin(10))
         .withAttribute('antiMage', (a) => a.withMin(8))
         .build(),
+      3,
       {
         alt: 'A long sword with a channel in the blade and a large, red hilt.',
         pathFragment: 'claymore',

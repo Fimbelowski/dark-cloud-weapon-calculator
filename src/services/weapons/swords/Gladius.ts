@@ -18,6 +18,7 @@ export default class Gladius extends Sword {
         // Anti-Monster-Type Attributes
         .withAttribute('antiUndead', (a) => a.withMin(15))
         .build(),
+      2,
       {
         alt: 'A medium-sized symmetrical sword with a leather hilt.',
         pathFragment: 'gladius',

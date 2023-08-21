@@ -19,6 +19,7 @@ export default class SmallSword extends Sword {
         // Anti-Monster-Type Attributes
         .withAttribute('antiMarine', (a) => a.withMin(33))
         .build(),
+      3,
       {
         alt: 'A small, simple sword with a squared curve at the end of the blade.',
         pathFragment: 'smallSword',

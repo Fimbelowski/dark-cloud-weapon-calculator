@@ -21,6 +21,7 @@ export default class SandBreaker extends Sword {
         .withAttribute('antiMetal', (a) => a.withMin(10))
         .withAttribute('antiMage', (a) => a.withMin(8))
         .build(),
+      2,
       {
         alt: 'A sword with a rust-colored blade, three vertical slits near the base of the blade, and a hole on the back edge of the blade near the hilt.',
         pathFragment: 'sandBreaker',

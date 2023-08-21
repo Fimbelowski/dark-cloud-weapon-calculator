@@ -19,6 +19,7 @@ export default class WiseOwlSword extends Sword {
         .withAttribute('antiBeast', (a) => a.withMin(12))
         .withAttribute('antiMage', (a) => a.withMin(12))
         .build(),
+      3,
       {
         alt: "A silvery sword whose tip looks feathered. There is an owl's face on the hilt with a large moustache.",
         pathFragment: 'wiseOwlSword',

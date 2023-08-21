@@ -29,6 +29,7 @@ export default class ChronicleSword extends Sword {
         .withAttribute('antiMimic', (a) => a.withMin(60))
         .withAttribute('antiMage', (a) => a.withMin(60))
         .build(),
+      3,
       {
         alt: 'A huge sword with a scissor-shaped gap in the tip. Greenish diamond shapes run along the center of the blade. Large, ornate golden hilt.',
         pathFragment: 'chronicleSword',

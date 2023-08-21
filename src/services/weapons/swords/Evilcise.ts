@@ -21,6 +21,7 @@ export default class Evilcise extends Sword {
         .withAttribute('antiMetal', (a) => a.withMin(10))
         .withAttribute('antiMage', (a) => a.withMin(10))
         .build(),
+      2,
       {
         alt: 'A black sword with a spiral hole cut from the back of the blade and a thin blue hilt.',
         pathFragment: 'evilcise',

@@ -22,6 +22,7 @@ export default class BraveArk extends Sword {
         .withAttribute('antiMetal', (a) => a.withMin(25))
         .withAttribute('antiMage', (a) => a.withMin(18))
         .build(),
+      2,
       {
         alt: 'A double-edged, sand-colored sword with runic markings down the middle of the blade.',
         pathFragment: 'braveArk',

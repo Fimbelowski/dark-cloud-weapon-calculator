@@ -30,6 +30,7 @@ export default class SwordOfZeus extends Sword {
         .withAttribute('antiMimic', (a) => a.withMin(22))
         .withAttribute('antiMage', (a) => a.withMin(60))
         .build(),
+      3,
       {
         alt: 'A grayish sword with red channels near the tip and base of the blade and a dark gray hilt.',
         pathFragment: 'swordOfZeus',

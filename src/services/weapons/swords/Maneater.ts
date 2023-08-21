@@ -20,6 +20,7 @@ export default class Maneater extends Sword {
         .withAttribute('antiMetal', (a) => a.withMin(10))
         .withAttribute('antiMage', (a) => a.withMin(55))
         .build(),
+      3,
       {
         alt: 'A curved sword with a thick red channel with oval-shaped stones embedded in it.',
         pathFragment: 'maneater',

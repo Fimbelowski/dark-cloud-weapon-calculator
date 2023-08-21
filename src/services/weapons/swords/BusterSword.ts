@@ -18,6 +18,7 @@ export default class BusterSword extends Sword {
         .withAttribute('antiSky', (a) => a.withMin(10))
         .withAttribute('antiMage', (a) => a.withMin(10))
         .build(),
+      4,
       {
         alt: 'A double-edged sword with a hollow channel near the base of the blade.',
         pathFragment: 'busterSword',

@@ -18,6 +18,7 @@ export default class Shamshir extends Sword {
         .withAttribute('antiSky', (a) => a.withMin(10))
         .withAttribute('antiMage', (a) => a.withMin(4))
         .build(),
+      2,
       {
         alt: 'A gray sword with a bluish center to the blade. Very curved blade and hilt.',
         pathFragment: 'shamshir',
