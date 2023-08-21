@@ -7,9 +7,10 @@ import { WeaponComponent } from './weapon/weapon.component';
 import { EdgeComponent } from './edge/edge.component';
 import { LayoutComponent } from './layout/layout.component';
 import { TerminiOptionsComponent } from './termini-options/termini-options.component';
+import { TerminusOptionsComponent } from './terminus-options/terminus-options.component';
 
 @NgModule({
-  declarations: [AppComponent, WeaponGraphComponent, WeaponComponent, EdgeComponent, LayoutComponent, TerminiOptionsComponent],
+  declarations: [AppComponent, WeaponGraphComponent, WeaponComponent, EdgeComponent, LayoutComponent, TerminiOptionsComponent, TerminusOptionsComponent],
   imports: [BrowserModule],
   providers: [],
   bootstrap: [AppComponent],
