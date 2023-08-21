@@ -1,0 +1,6 @@
+<ng-container *ngIf="isWeaponDefined(weapon); else elseBlock">
+  <app-weapon [weapon]="weapon" />
+</ng-container>
+<ng-template #elseBlock>
+  <p>Not Set</p>
+</ng-template>

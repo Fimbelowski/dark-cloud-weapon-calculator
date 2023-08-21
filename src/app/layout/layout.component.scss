@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  min-height: 100vh;
+}
+
+.layout {
+  &__aside {
+    border-left: 1px solid black;
+    padding: 1rem;
+    min-width: 25rem;
+  }
+
+  &__main {
+    padding: 1rem;
+  }
+}
