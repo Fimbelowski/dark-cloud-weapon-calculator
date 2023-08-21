@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, type Signal } from '@angular/core';
 
 import type Weapon from 'src/services/weapons/Weapon';
 import type WeaponType from 'src/services/weapons/WeaponType';
@@ -9,6 +9,6 @@ import type WeaponType from 'src/services/weapons/WeaponType';
   styleUrls: ['./termini-options.component.scss'],
 })
 export class TerminiOptionsComponent<T extends WeaponType> {
-  @Input() sourceWeapon?: Weapon<T>;
-  @Input() destinationWeapon?: Weapon<T>;
+  @Input({ required: true }) sourceWeapon!: Signal<Weapon<T> | undefined>;
+  @Input({ required: true }) destinationWeapon!: Signal<Weapon<T> | undefined>;
 }

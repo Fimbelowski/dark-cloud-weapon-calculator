@@ -9,5 +9,11 @@ import type WeaponType from 'src/services/weapons/WeaponType';
   styleUrls: ['./terminus-options.component.scss'],
 })
 export class TerminusOptionsComponent<T extends WeaponType> {
-  @Input() weapon?: Weapon<T>;
+  @Input({ required: true }) weapon!: Weapon<T> | undefined;
+
+  isWeaponDefined(
+    weaponOrUndefined: Weapon<T> | undefined
+  ): weaponOrUndefined is Weapon<T> {
+    return weaponOrUndefined !== undefined;
+  }
 }

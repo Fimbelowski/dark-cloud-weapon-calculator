@@ -3,7 +3,7 @@
     (click)="onWeaponClick(weapon)"
     *ngFor="let weapon of row"
     [ngStyle]="{ 'grid-row-start': i + 1 }"
-    [onBuildUpPath]="isWeaponOnBuildUpPath(weapon)"
+    [highlighted]="isWeaponOnBuildUpPath(weapon)"
     [weapon]="weapon"
   />
 </ng-container>

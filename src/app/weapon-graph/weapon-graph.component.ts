@@ -3,14 +3,14 @@ import {
   Component,
   computed,
   ElementRef,
+  EventEmitter,
   HostBinding,
   Input,
   OnChanges,
+  Output,
   QueryList,
   type Signal,
-  signal,
   ViewChildren,
-  type WritableSignal,
   ChangeDetectorRef,
 } from '@angular/core';
 
@@ -31,7 +31,14 @@ export class WeaponGraphComponent<T extends WeaponType>
 {
   constructor(private cd: ChangeDetectorRef) {}
 
+  @Input({ required: true }) destinationWeapon!: Signal<Weapon<T> | undefined>;
+  @Input({ required: true }) sourceWeapon!: Signal<Weapon<T> | undefined>;
   @Input({ required: true }) weaponGraph!: Readonly<WeaponGraph<T>>;
+
+  @Output() destinationWeaponChangeEvent = new EventEmitter<
+    Weapon<T> | undefined
+  >();
+  @Output() sourceWeaponChangeEvent = new EventEmitter<Weapon<T> | undefined>();
 
   @HostBinding('style.grid-template-columns') get columns() {
     const columns = Math.max(...this.weaponMatrix.map((row) => row.length));
@@ -50,8 +57,6 @@ export class WeaponGraphComponent<T extends WeaponType>
   weaponMatrix: IWeaponMatrix<T> = [];
   weaponElementsByName = new Map<WeaponNameByType[T], HTMLElement>();
 
-  destinationWeapon: WritableSignal<Weapon<T> | undefined> = signal(undefined);
-  sourceWeapon: WritableSignal<Weapon<T> | undefined> = signal(undefined);
   sourceOrDestinationToSetNext: 'destination' | 'source' = 'source';
 
   buildUpOptions: Signal<Map<WeaponNameByType[T], Weapon<T>>> = computed(() =>
@@ -148,25 +153,23 @@ export class WeaponGraphComponent<T extends WeaponType>
       this.sourceWeapon() === undefined ||
       !this.isWeaponOnBuildUpPath(weapon)
     ) {
-      this.sourceWeapon.set(weapon);
-      this.destinationWeapon.set(undefined);
-
-      if (weapon.buildsUpInto.size === 0) {
-        this.destinationWeapon.set(weapon);
-      }
+      this.sourceWeaponChangeEvent.emit(weapon);
+      this.destinationWeaponChangeEvent.emit(
+        weapon.buildsUpInto.size === 0 ? weapon : undefined
+      );
 
       this.sourceOrDestinationToSetNext = 'destination';
       return;
     }
 
     if (this.sourceOrDestinationToSetNext === 'source') {
-      this.sourceWeapon.set(weapon);
-      this.destinationWeapon.set(undefined);
+      this.sourceWeaponChangeEvent.emit(weapon);
+      this.destinationWeaponChangeEvent.emit(undefined);
       this.sourceOrDestinationToSetNext = 'destination';
       return;
     }
 
-    this.destinationWeapon.set(weapon);
+    this.destinationWeaponChangeEvent.emit(weapon);
     this.sourceOrDestinationToSetNext = 'source';
   }
 }

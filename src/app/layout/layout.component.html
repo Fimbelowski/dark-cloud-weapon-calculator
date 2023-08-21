@@ -1,6 +1,15 @@
 <main class="layout__main">
-  <app-weapon-graph [weaponGraph]="weaponGraph" />
+  <app-weapon-graph
+    [destinationWeapon]="destinationWeapon"
+    (destinationWeaponChangeEvent)="onDestinationWeaponChange($event)"
+    [sourceWeapon]="sourceWeapon"
+    (sourceWeaponChangeEvent)="onSourceWeaponChange($event)"
+    [weaponGraph]="weaponGraph"
+  />
 </main>
 <aside class="layout__aside">
-  <app-termini-options />
+  <app-termini-options
+    [destinationWeapon]="destinationWeapon"
+    [sourceWeapon]="sourceWeapon"
+  />
 </aside>
