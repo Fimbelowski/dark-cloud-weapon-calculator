@@ -1,1 +1,4 @@
-<p>terminus-options works!</p>
+<p *ngIf="weapon === undefined; else elseBlock">Not Set</p>
+<ng-template #elseBlock
+  ><p>{{ weapon?.name }}</p></ng-template
+>
