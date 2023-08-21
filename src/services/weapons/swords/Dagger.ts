@@ -16,6 +16,7 @@ export default class Dagger extends Sword {
         // Anti-Monster-Type Attributes
         .withAttribute('antiBeast', (a) => a.withMin(4))
         .build(),
+      2,
       { alt: 'A simple, short dagger.', pathFragment: 'dagger' },
       {
         defaultWeapon: true,

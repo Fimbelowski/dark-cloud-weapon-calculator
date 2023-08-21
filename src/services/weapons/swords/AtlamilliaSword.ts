@@ -30,6 +30,7 @@ export default class AtlamilliaSword extends Sword {
         .withAttribute('antiMimic', (a) => a.withMin(40))
         .withAttribute('antiMage', (a) => a.withMin(20))
         .build(),
+      3,
       {
         alt: 'A long, single-edged sword with a blue blade with an orange back. A blue sphere surrounded by orange is on the hilt.',
         pathFragment: 'atlamilliaSword',

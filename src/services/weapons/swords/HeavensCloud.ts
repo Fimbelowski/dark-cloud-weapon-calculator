@@ -22,6 +22,7 @@ export default class HeavensCloud extends Sword {
         .withAttribute('antiBeast', (a) => a.withMin(30))
         .withAttribute('antiMetal', (a) => a.withMin(35))
         .build(),
+      2,
       {
         alt: 'A sword with a deep blue blade with ornate golden engravings and a golden hilt.',
         pathFragment: 'heavensCloud',

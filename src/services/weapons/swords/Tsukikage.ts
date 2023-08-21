@@ -20,8 +20,8 @@ export default class Tsukikage extends Sword {
         .withAttribute('antiBeast', (a) => a.withMin(8))
         .withAttribute('antiMetal', (a) => a.withMin(20))
         .withAttribute('antiMage', (a) => a.withMin(8))
-
         .build(),
+      3,
       {
         alt: 'A curved sword with a white leading edge and a bluish-gray trailing edge.',
         pathFragment: 'tsukikage',

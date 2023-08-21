@@ -15,6 +15,7 @@ export default class BoneRapier extends Sword {
         // Elemental Attributes
         .withAttribute('ice', (a) => a.withMin(5))
         .build(),
+      2,
       {
         alt: 'A very thin, ragged looking rapier with a skull and crossbones hilt.',
         pathFragment: 'boneRapier',

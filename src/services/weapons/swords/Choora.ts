@@ -18,6 +18,7 @@ export default class Choora extends Sword {
         // Anti-Monster-Type Attributes
         .withAttribute('antiMage', (a) => a.withMin(20))
         .build(),
+      2,
       {
         alt: 'A short swordwith a goldish blade that looks fastened to the hilt with many leather straps.',
         pathFragment: 'choora',

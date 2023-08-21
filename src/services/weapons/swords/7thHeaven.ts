@@ -23,6 +23,7 @@ export default class SeventhHeaven extends Sword {
         .withAttribute('antiMetal', (a) => a.withMin(10))
         .withAttribute('antiMage', (a) => a.withMin(8))
         .build(),
+      3,
       {
         alt: 'A medium-sized, single-edged sword that transitions from red at the hilt to blue at the tip of the blade.',
         pathFragment: '7thHeaven',

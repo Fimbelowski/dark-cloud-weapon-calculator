@@ -18,6 +18,7 @@ export default class MachoSword extends Sword {
         .withAttribute('antiBeast', (a) => a.withMin(12))
         .withAttribute('antiMimic', (a) => a.withMin(35))
         .build(),
+      3,
       {
         alt: 'A sword with a geometrically patterned blade and a hilt that looks like a man flexing his biceps.',
         pathFragment: 'machoSword',

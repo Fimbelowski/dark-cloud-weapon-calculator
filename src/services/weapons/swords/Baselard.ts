@@ -18,6 +18,7 @@ export default class Baselard extends Sword {
         // Anti-Monster-Type Attributes
         .withAttribute('antiSky', (a) => a.withMin(10))
         .build(),
+      2,
       {
         alt: 'A medium-sized, single-edged sword with a tan blade that curves slightly and has a spur on the backside.',
         pathFragment: 'baselard',

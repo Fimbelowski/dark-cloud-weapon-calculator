@@ -18,6 +18,7 @@ export default class KitchenKnife extends Sword {
         // Anti-Monster-Type Attributes
         .withAttribute('antiMarine', (a) => a.withMin(33))
         .build(),
+      2,
       {
         alt: 'A dark blue kitchen cleaver with a whitish edge.',
         pathFragment: 'kitchenKnife',

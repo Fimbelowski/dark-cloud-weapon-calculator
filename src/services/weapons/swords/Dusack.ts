@@ -22,6 +22,7 @@ export default class Dusack extends Sword {
         .withAttribute('antiMetal', (a) => a.withMin(10))
         .withAttribute('antiMage', (a) => a.withMin(8))
         .build(),
+      3,
       { alt: 'A black, slightly curved cutlass.', pathFragment: 'dusack' },
       {
         buildsUpInto: new Set([new BraveArk(), new SevenBranchSword()]),

@@ -18,6 +18,7 @@ export default class Sax extends Sword {
         .withAttribute('antiPlant', (a) => a.withMin(10))
         .withAttribute('antiMimic', (a) => a.withMin(10))
         .build(),
+      3,
       {
         alt: 'A sword with an angular blade that has teeth like a saw. The hilt curves up and away from the blade.',
         pathFragment: 'sax',

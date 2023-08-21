@@ -20,6 +20,7 @@ export default class DarkCloud extends Sword {
         .withAttribute('antiMetal', (a) => a.withMin(30))
         .withAttribute('antiMimic', (a) => a.withMin(30))
         .build(),
+      3,
       {
         alt: 'A long sword with a black blade that has a white center with black emblems down the length of the blade. A hilt that looks like a mouth with sharp teeth.',
         pathFragment: 'darkCloud',

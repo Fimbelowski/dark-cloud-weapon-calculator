@@ -19,6 +19,7 @@ export default class SevenBranchSword extends Sword {
         .withAttribute('wind', (a) => a.withMin(20))
         .withAttribute('holy', (a) => a.withMin(20))
         .build(),
+      3,
       {
         alt: 'A long, double-edged sword with branches that look like smaller swords coming out of both sides of the blade.',
         pathFragment: '7BranchSword',

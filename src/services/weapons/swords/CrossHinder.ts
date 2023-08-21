@@ -23,6 +23,7 @@ export default class CrossHinder extends Sword {
         .withAttribute('antiMetal', (a) => a.withMin(15))
         .withAttribute('antiMimic', (a) => a.withMin(20))
         .build(),
+      3,
       {
         alt: 'A big, golden sword shaped like  cross with a red channel throughout.',
         pathFragment: 'crossHeinder',

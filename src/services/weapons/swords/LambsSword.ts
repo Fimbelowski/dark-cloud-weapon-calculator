@@ -20,6 +20,7 @@ export default class LambsSword extends Sword {
         .withAttribute('antiBeast', (a) => a.withMin(35))
         .withAttribute('antiSky', (a) => a.withMin(35))
         .build(),
+      2,
       [
         {
           alt: 'A wavy, beige colored sword with a hilt that looks like a lamb.',

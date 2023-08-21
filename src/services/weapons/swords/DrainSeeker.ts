@@ -23,6 +23,7 @@ export default class DrainSeeker extends Sword {
         .withAttribute('antiSky', (a) => a.withMin(25))
         .withAttribute('antiMage', (a) => a.withMin(10))
         .build(),
+      4,
       {
         alt: 'A sword with a deep red blade with a spur at the end and black patterning near the base, and a hilt that looks like curly horns.',
         pathFragment: 'drainSeeker',

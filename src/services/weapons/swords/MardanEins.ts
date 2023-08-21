@@ -25,6 +25,7 @@ export default class MardanEins extends Sword {
         .withAttribute('antiRock', (a) => a.withMin(10))
         .withAttribute('antiMimic', (a) => a.withMin(10))
         .build(),
+      3,
       {
         alt: 'An ornate sword with a blue hilt and a light blue blade with an ornate eye.',
         pathFragment: 'mardanEins',

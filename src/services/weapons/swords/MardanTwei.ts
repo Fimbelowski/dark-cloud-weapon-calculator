@@ -25,6 +25,7 @@ export default class MardanTwei extends Sword {
         .withAttribute('antiRock', (a) => a.withMin(10))
         .withAttribute('antiMimic', (a) => a.withMin(10))
         .build(),
+      3,
       {
         alt: 'A vividly colorful sword with a blue hilt and a red blade with an ornate eye.',
         pathFragment: 'mardanTwei',

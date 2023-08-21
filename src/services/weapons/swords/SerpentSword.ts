@@ -23,6 +23,7 @@ export default class SerpentSword extends Sword {
         .withAttribute('antiBeast', (a) => a.withMin(24))
         .withAttribute('antiSky', (a) => a.withMin(23))
         .build(),
+      3,
       {
         alt: 'A red sword with a white-edged blade and pentagonal holes near the tip.',
         pathFragment: 'serpentSword',

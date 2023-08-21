@@ -21,6 +21,7 @@ export default class SunSword extends Sword {
         .withAttribute('antiMetal', (a) => a.withMin(15))
         .withAttribute('antiMage', (a) => a.withMin(10))
         .build(),
+      4,
       {
         alt: 'A golden blade with a black patterned center and a sun and moon emblem on the hilt.',
         pathFragment: 'sunSword',
