@@ -11,7 +11,16 @@ import { TerminusOptionsComponent } from './terminus-options/terminus-options.co
 import { NumberInputComponent } from './number-input/number-input.component';
 
 @NgModule({
-  declarations: [AppComponent, WeaponGraphComponent, WeaponComponent, EdgeComponent, LayoutComponent, TerminiOptionsComponent, TerminusOptionsComponent, NumberInputComponent],
+  declarations: [
+    AppComponent,
+    WeaponGraphComponent,
+    WeaponComponent,
+    EdgeComponent,
+    LayoutComponent,
+    TerminiOptionsComponent,
+    TerminusOptionsComponent,
+    NumberInputComponent,
+  ],
   imports: [BrowserModule],
   providers: [],
   bootstrap: [AppComponent],
