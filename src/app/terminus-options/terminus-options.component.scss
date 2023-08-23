@@ -1,0 +1,12 @@
+.terminus-options {
+  &__fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  &__weapon {
+    margin-bottom: 1rem;
+  }
+}
